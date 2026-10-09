@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self' https://formsubmit.co https://api.ipify.org https://brasilapi.com.br https://www.googleapis.com; frame-src 'self' blob: data: https:; object-src 'self' blob: data:; base-uri 'self'; form-action 'self' https://formsubmit.co; manifest-src 'self'; worker-src 'self'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Página não encontrada • CIEESC PLAY</title>
+<meta name="robots" content="noindex">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root{--p:#0056b3;--s:#6f42c1;--a:#00b4d8;--bg:linear-gradient(135deg,var(--p),var(--s),var(--a));--sh:min(18vh,170px);box-sizing:border-box}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+/* sem rolagem: tudo se ajusta ao tamanho da tela (largura e altura) */
+html,body{margin:0;height:100%;overflow:hidden;overscroll-behavior:none}
+body{font-family:'Nunito',system-ui,sans-serif;color:#fff;text-align:center;height:100vh;height:100dvh;background:#0056b3 var(--bg);background-size:400% 400%;animation:grad 15s ease infinite;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:min(1.8vh,16px);padding:calc(1vh + env(safe-area-inset-top,0px)) 4vw calc(var(--sh) + 1.5vh + env(safe-area-inset-bottom,0px))}
+@keyframes grad{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+
+/* hexágonos flutuando (igual à tela de carregamento) */
+.hex{position:fixed;pointer-events:none;opacity:.4;animation:flut 12s ease-in-out infinite alternate;z-index:0}
+.h1{width:min(14vw,170px);top:8%;left:4%}.h2{width:min(16vw,200px);top:12%;right:5%;animation-delay:-4s}.h3{width:min(10vw,120px);top:52%;left:5%;animation-delay:-7s}.h4{width:min(13vw,150px);top:48%;right:6%;animation-delay:-2s}
+@keyframes flut{from{transform:translateY(0) rotate(0)}to{transform:translateY(-22px) rotate(6deg)}}
+
+.marca{position:relative;z-index:2;font:700 clamp(.95rem,2.6vh,1.35rem) 'Fredoka',sans-serif;opacity:.95}
+.marca i{font-style:normal;animation:cor 6s ease-in-out infinite;display:inline-block}
+@keyframes cor{0%,100%{color:#ff7eb6}33%{color:#c9b6ff}66%{color:#8fd3ff}}
+
+/* 4 [hexágono-play] 4 */
+.num{position:relative;z-index:2;display:flex;align-items:center;justify-content:center;gap:.02em;font-family:'Fredoka',sans-serif;font-weight:700;font-size:min(27vw,23vh,16rem);line-height:1;text-shadow:0 .05em 0 rgba(0,0,0,.18)}
+.num span{display:inline-block;animation:pula 2.4s ease-in-out infinite}
+.num span:last-child{animation-delay:.25s}
+@keyframes pula{0%,100%{transform:translateY(0)}50%{transform:translateY(-.06em)}}
+.num svg{width:.78em;height:.78em;margin:0 .02em;filter:drop-shadow(0 .05em 0 rgba(0,0,0,.18));animation:gira 7s linear infinite}
+@keyframes gira{0%{transform:rotate(0)}50%{transform:rotate(12deg) scale(1.05)}100%{transform:rotate(0)}}
+
+/* mascote + balão */
+.cena{position:relative;z-index:2;display:flex;align-items:center;justify-content:center;gap:min(2vw,22px);overflow:visible}
+.livrinho{width:min(30vw,19vh,230px);height:auto;overflow:visible;cursor:pointer;flex:0 0 auto;animation:bob 3s ease-in-out infinite;filter:drop-shadow(0 8px 10px rgba(0,0,0,.25));-webkit-tap-highlight-color:transparent}
+.livrinho:active{transform:scale(.95)}
+@keyframes pulo{0%{transform:translateY(0)}35%{transform:translateY(-26px) rotate(-6deg)}70%{transform:translateY(0) rotate(4deg)}100%{transform:translateY(0)}}
+.livrinho.pulo{animation:pulo .6s ease,bob 3s ease-in-out .6s infinite}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-8px) rotate(2deg)}}
+.lupa{transform-origin:70px 120px;animation:procura 3.2s ease-in-out infinite}
+@keyframes procura{0%,100%{transform:rotate(-14deg)}50%{transform:rotate(16deg)}}
+.balao{position:relative;max-width:min(88vw,430px);background:#fff;color:#2d3748;border-radius:min(2.4vh,22px);padding:min(1.8vh,18px) min(2.4vw,20px);font-weight:800;font-size:clamp(.82rem,2.3vh,1.25rem);line-height:1.35;text-align:left;box-shadow:0 8px 20px rgba(0,0,0,.25)}
+.balao::after{content:"";position:absolute;left:-10px;top:50%;margin-top:-10px;border:10px solid transparent;border-right-color:#fff;border-left:0}
+
+.acoes{position:relative;z-index:2;display:flex;justify-content:center}
+.bt{border:2px solid #fff;border-radius:14px;min-height:clamp(38px,6vh,54px);padding:0 clamp(20px,4vw,36px);display:inline-flex;align-items:center;justify-content:center;font:800 clamp(.92rem,2.3vh,1.15rem) 'Nunito',sans-serif;cursor:pointer;text-decoration:none;color:var(--p);background:#fff;transition:transform .15s,background .2s}
+.bt:hover{transform:translateY(-2px);background:#f1f5ff}
+.bt:focus-visible,.livrinho:focus-visible{outline:3px solid #ffd166;outline-offset:3px}
+.rodape{position:relative;z-index:2;font-size:clamp(.62rem,1.7vh,.8rem);font-weight:800;opacity:.8;letter-spacing:.3px}
+
+/* estante com uma vaga vazia: a página que sumiu */
+#estante{position:fixed;left:0;right:0;bottom:0;z-index:1;height:var(--sh);display:flex;align-items:flex-end;justify-content:center;gap:4px;padding:0 10px calc(10px + env(safe-area-inset-bottom,0px));border-bottom:min(1.4vh,12px) solid rgba(0,0,0,.35);background:linear-gradient(transparent,rgba(0,0,0,.18))}
+.livro{flex:0 1 var(--w);height:calc(var(--h)*var(--esc,1));background:var(--c);border-radius:5px 5px 2px 2px;position:relative;transform-origin:bottom center;box-shadow:inset -4px 0 0 rgba(0,0,0,.18),inset 0 8px 0 rgba(255,255,255,.18);cursor:pointer}
+.livro::after{content:"";position:absolute;left:18%;right:18%;top:22%;height:4px;border-radius:2px;background:rgba(255,255,255,.75);box-shadow:0 10px 0 rgba(255,255,255,.45)}
+.livro.bal{animation:bal .7s ease}
+@keyframes bal{0%,100%{transform:rotate(0)}25%{transform:rotate(-8deg)}60%{transform:rotate(6deg)}}
+.vaga{flex:0 0 calc(70px*var(--esc,1));height:calc(104px*var(--esc,1));border:3px dashed rgba(255,255,255,.85);border-radius:8px;display:flex;align-items:center;justify-content:center;font:700 calc(2.4rem*var(--esc,1)) 'Fredoka',sans-serif;animation:pisca 2s ease-in-out infinite}
+@keyframes pisca{50%{background:rgba(255,255,255,.18)}}
+
+/* celular em pé: mascote em cima, balão embaixo (seta para cima), botão largo */
+@media (max-width:560px){
+  .cena{flex-direction:column;gap:min(1.4vh,12px)}
+  .balao{text-align:center;max-width:90vw}
+  .balao::after{left:50%;top:-10px;margin:0 0 0 -10px;border:10px solid transparent;border-bottom-color:#fff;border-top:0}
+  .bt{width:min(90vw,340px)}
+  .hex{opacity:.28}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</head>
+<body>
+<svg class="hex h1" viewBox="0 0 100 86.6" aria-hidden="true"><polygon points="25,2 75,2 98,43.3 75,84.6 25,84.6 2,43.3" fill="rgba(255,255,255,.08)" stroke="#fff" stroke-width="3.5"/></svg>
+<svg class="hex h2" viewBox="0 0 100 86.6" aria-hidden="true"><polygon points="25,2 75,2 98,43.3 75,84.6 25,84.6 2,43.3" fill="rgba(255,255,255,.08)" stroke="#fff" stroke-width="3.5"/></svg>
+<svg class="hex h3" viewBox="0 0 100 86.6" aria-hidden="true"><polygon points="25,2 75,2 98,43.3 75,84.6 25,84.6 2,43.3" fill="rgba(255,255,255,.08)" stroke="#fff" stroke-width="3.5"/></svg>
+<svg class="hex h4" viewBox="0 0 100 86.6" aria-hidden="true"><polygon points="25,2 75,2 98,43.3 75,84.6 25,84.6 2,43.3" fill="rgba(255,255,255,.08)" stroke="#fff" stroke-width="3.5"/></svg>
+
+<div class="marca">CIEESC <i>▶︎</i> PLAY</div>
+
+<div class="num" role="img" aria-label="Erro 404">
+  <span>4</span>
+  <svg viewBox="0 0 100 100" aria-hidden="true">
+    <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0"><animate attributeName="stop-color" values="#d63384;#6f42c1;#0056b3;#d63384" dur="6s" repeatCount="indefinite"/></stop>
+      <stop offset="1"><animate attributeName="stop-color" values="#ff8fab;#a78bfa;#00b4d8;#ff8fab" dur="6s" repeatCount="indefinite"/></stop>
+    </linearGradient></defs>
+    <polygon points="27,9 73,9 97,50 73,91 27,91 3,50" fill="url(#g)" stroke="#fff" stroke-width="4" stroke-linejoin="round"/>
+    <polygon points="42,31 42,69 72,50" fill="#fff"/>
+  </svg>
+  <span>4</span>
+</div>
+
+<div class="cena">
+  <svg class="livrinho" id="livrinho" viewBox="0 0 130 150" role="button" tabindex="0" aria-label="Livrinho procurando a página">
+    <rect x="22" y="14" width="78" height="104" rx="12" fill="#d63384"/>
+    <rect x="22" y="14" width="14" height="104" rx="8" fill="#a82468"/>
+    <rect x="92" y="20" width="10" height="92" rx="4" fill="#fff" opacity=".9"/>
+    <g id="olhos">
+      <circle cx="56" cy="52" r="13" fill="#fff"/><circle cx="86" cy="52" r="13" fill="#fff"/>
+      <circle class="pup" cx="56" cy="52" r="6" fill="#2d3748"/><circle class="pup" cx="86" cy="52" r="6" fill="#2d3748"/>
+    </g>
+    <path d="M60 82q11 9 22 0" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <rect x="40" y="118" width="10" height="22" rx="5" fill="#a82468"/><rect x="74" y="118" width="10" height="22" rx="5" fill="#a82468"/>
+    <ellipse cx="45" cy="141" rx="11" ry="6" fill="#2d3748"/><ellipse cx="79" cy="141" rx="11" ry="6" fill="#2d3748"/>
+    <g class="lupa"><line x1="100" y1="96" x2="122" y2="62" stroke="#ffd166" stroke-width="7" stroke-linecap="round"/><circle cx="120" cy="40" r="20" fill="rgba(255,255,255,.35)" stroke="#ffd166" stroke-width="6"/></g>
+  </svg>
+  <div class="balao" id="balao">Não foi possível encontrar o que você pediu... quer procurar de novo?</div>
+</div>
+
+<div class="acoes">
+  <a class="bt p" id="voltar" href="index.html">Voltar ao início</a>
+</div>
+<div class="rodape">Erro 404 • Página não encontrada</div>
+
+<div id="estante" aria-hidden="true"></div>
+
+<script>
+(function(){
+  // estante de livros nas cores do portal, com uma vaga vazia
+  var cores=['#d63384','#6f42c1','#00b4d8','#ffd166','#0056b3','#ff8fab','#7c5cff','#2ec4b6'], est=document.getElementById('estante');
+  function sorte(i){var x=Math.sin(i*127.1+311.7)*43758.5453;return x-Math.floor(x);}
+  function monta(){
+    est.innerHTML='';
+    est.style.setProperty('--esc',Math.max(.45,Math.min(1.4,(est.clientHeight-22)/118)));
+    var n=Math.min(28,Math.max(8,Math.floor(innerWidth/48))),meio=Math.floor(n/2);
+    for(var i=0;i<n;i++){
+      if(i===meio){var v=document.createElement('div');v.className='vaga';v.textContent='?';est.appendChild(v);continue;}
+      var l=document.createElement('div');l.className='livro';
+      l.style.setProperty('--w',(26+sorte(i)*16)+'px');l.style.setProperty('--h',(70+sorte(i+50)*44)+'px');l.style.setProperty('--c',cores[(i*3+1)%cores.length]);
+      l.onclick=function(){this.classList.remove('bal');void this.offsetWidth;this.classList.add('bal');};
+      est.appendChild(l);
+    }
+  }
+  monta();var rt;addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(monta,150);});
+  // botão: início (index.html) ou, se já estiver logado, acervo (playing.html)
+  // o caminho é calculado a partir da raiz do site, porque o GitHub Pages abre esta página em qualquer endereço inexistente
+  var seg=location.pathname.split('/')[1];
+  var raiz=(location.hostname.slice(-9)==='github.io'&&seg)?'/'+seg+'/':'/';
+  var logado=false;
+  try{var ss=JSON.parse(localStorage.getItem('ciee_session')||sessionStorage.getItem('ciee_session')||'null');logado=!!(ss&&ss.nome);}catch(e){}
+  var bt=document.getElementById('voltar');
+  bt.href=raiz+(logado?'playing.html':'index.html');
+  bt.textContent=logado?'Voltar ao acervo':'Voltar ao início';
+  // livrinho: pulinho ao tocar
+  var lv=document.getElementById('livrinho');
+  function pulo(){lv.classList.remove('pulo');void lv.getBoundingClientRect();lv.classList.add('pulo');}
+  lv.onclick=pulo;lv.onkeydown=function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();pulo();}};
+  // os olhos seguem o dedo/mouse
+  var pups=document.querySelectorAll('.pup');
+  function olha(x,y){pups.forEach(function(p){var r=p.parentNode.querySelector('circle').getBoundingClientRect();var c=p.getBoundingClientRect();var cx=c.left+c.width/2,cy=c.top+c.height/2;var a=Math.atan2(y-cy,x-cx),m=5;p.style.transform='translate('+Math.cos(a)*m+'px,'+Math.sin(a)*m+'px)';});}
+  addEventListener('pointermove',function(e){olha(e.clientX,e.clientY);});
+})();
+</script>
+</body>
+</html>

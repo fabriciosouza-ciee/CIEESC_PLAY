@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self' https://formsubmit.co https://api.ipify.org https://brasilapi.com.br https://www.googleapis.com; frame-src 'self' blob: data: https:; object-src 'self' blob: data:; base-uri 'self'; form-action 'self' https://formsubmit.co; manifest-src 'self'; worker-src 'self'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<script src="js/core/seguranca.js?v=1"></script>
+<script src="js/vendor/qrcode.js?v=1"></script>
+<script src="js/features/scanner.js?v=1" defer></script>
+<script src="js/features/relatorio.js?v=1" defer></script>
+<script src="js/features/imagem.js?v=1" defer></script>
+<script src="js/core/niveis.js?v=1"></script>
+<script src="js/core/lixeira.js?v=1"></script>
+<link rel="apple-touch-icon" sizes="180x180" href="assets/icons/icone-ios-v2.png?v=2">
+<link rel="apple-touch-icon-precomposed" href="assets/icons/icone-ios-v2.png?v=2">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>CIEESC ▶︎ PLAY • Gerenciar</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/admin.css?v=2">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" sizes="48x48" href="assets/icons/favicon-48.png">
+<link rel="icon" type="image/png" sizes="512x512" href="assets/icons/favicon-512.png">
+<meta name="theme-color" content="#0056b3">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="CIEESC PLAY">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+</head>
+<body>
+
+    <!-- Tela de Acesso Negado -->
+    <div id="access-denied-screen">
+<svg class="hex-shape hex1" viewBox="0 0 100 86.6"><polygon points="25,2 75,2 98,43.3 75,84.6 25,84.6 2,43.3" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.55)" stroke-width="3"/></svg>
+        <svg class="hex-shape hex2" viewBox="0 0 100 86.6"><polygon points="25,2 75,2 98,43.3 75,84.6 25,84.6 2,43.3" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.55)" stroke-width="3"/></svg>
+        <svg class="hex-shape hex3" viewBox="0 0 100 86.6"><polygon points="25,2 75,2 98,43.3 75,84.6 25,84.6 2,43.3" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.55)" stroke-width="3"/></svg>
+        <svg class="hex-shape hex4" viewBox="0 0 100 86.6"><polygon points="25,2 75,2 98,43.3 75,84.6 25,84.6 2,43.3" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.55)" stroke-width="3"/></svg>
+
+        <div class="denied-card">
+            <span class="denied-icon"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/></svg></span>
+            <h1 class="denied-title">Acesso Não Permitido</h1>
+            <p class="denied-text">
+                Esta área é exclusiva para Orientadores e Monitores autorizados com código de acesso.<br>
+                Redirecionando para o login em <strong id="denied-count">5</strong> segundos...
+            </p>
+            <a href="index.html?acao=login" class="btn-portal" style="width: 100%; padding: 12px; font-size: 1rem;">
+                Ir agora para o login
+            </a>
+        </div>
+    </div>
+
+    <!-- Tela de Logout (mesmo design da tela de acesso negado) -->
+    <div id="logout-screen">
+<svg class="hex-shape hex1" viewBox="0 0 100 86.6"><polygon points="25,2 75,2 98,43.3 75,84.6 25,84.6 2,43.3" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.55)" stroke-width="3"/></svg>
+        <svg class="hex-shape hex2" viewBox="0 0 100 86.6"><polygon points="25,2 75,2 98,43.3 75,84.6 25,84.6 2,43.3" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.55)" stroke-width="3"/></svg>
+        <svg class="hex-shape hex3" viewBox="0 0 100 86.6"><polygon points="25,2 75,2 98,43.3 75,84.6 25,84.6 2,43.3" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.55)" stroke-width="3"/></svg>
+        <svg class="hex-shape hex4" viewBox="0 0 100 86.6"><polygon points="25,2 75,2 98,43.3 75,84.6 25,84.6 2,43.3" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.55)" stroke-width="3"/></svg>
+
+        <div class="denied-card">
+            <span class="denied-icon"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5M21 12H9"/></svg></span>
+            <h1 class="denied-title ok">Você saiu do sistema</h1>
+            <p class="denied-text">
+                Sua sessão foi encerrada com segurança.<br>
+                Redirecionando para o portal em <strong id="logout-count">5</strong> segundos...
+            </p>
+            <a href="index.html" class="btn-portal" style="width: 100%; padding: 12px; font-size: 1rem;">
+                Ir agora para o portal
+            </a>
+        </div>
+    </div>
+
+    <!-- Conteúdo do Painel Administrativo -->
+    <div id="admin-main-wrapper">
+        <!-- Header -->
+        <div id="m-backdrop"></div>
+        <div id="m-sheet" role="dialog" aria-modal="true"><div class="m-grab"></div><div class="m-sheet-title" id="m-sheet-title"></div><div id="m-sheet-body"></div></div>
+        <nav id="m-tabbar" aria-label="Navegação principal"></nav>
+        <header>
+            <div class="admin-brand" id="brand-header">
+                <span id="brand-text">CIEESC <span class="play-cor play-svg"><svg viewBox="0 0 100 100" aria-hidden="true" focusable="false"><path d="M14 10L90 50 14 90Z" fill="currentColor" stroke="currentColor" stroke-width="12" stroke-linejoin="round"/></svg></span> PLAY</span>
+            </div>
+            <div class="header-controls">
+                
+
+                
+                <a href="playing.html" class="btn-portal">Ir para o Acervo</a>
+                <div class="user-menu" id="user-menu">
+                <button type="button" class="user-badge-admin" id="user-badge" aria-haspopup="true" aria-expanded="false" onclick="toggleUserMenu(event)">
+                    <span id="admin-avatar" class="ini-ava"></span>
+                    <div>
+                        <div id="admin-name" style="font-weight: 900; line-height: 1.1; font-size: 0.85rem;">Usuário</div>
+                        <div id="admin-role" style="font-size: 0.7rem; color: var(--muted-ok, #526071);">Nível de Acesso</div>
+                    </div>
+                    <svg class="user-caret" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+                </button>
+                <div class="user-drop" id="user-drop" role="menu">
+                    <a href="playing.html" role="menuitem">Ir para o Acervo</a>
+                    <a href="index.html" role="menuitem" class="sair" onclick="logout(); return false;">Desconectar</a>
+                </div>
+                </div>
+            </div>
+        </header>
+        <div id="m-sub"><button type="button" id="m-portal" aria-label="Ir para o Acervo" title="Ir para o Acervo" onclick="location.href='playing.html'"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c3.2 3.4 3.2 14.6 0 18"/><path d="M12 3c-3.2 3.4-3.2 14.6 0 18"/></svg></button><span id="m-user"></span></div>
+
+        <!-- Barra de Navegação -->
+        <nav class="admin-nav" id="admin-nav"></nav>
+
+        <!-- Container Principal -->
+        <div class="admin-container">
+
+            <!-- INÍCIO: quadros, visitas, top usuários e conectados -->
+            <section id="admin-inicio" class="admin-section active">
+                <div class="section-header"><h2>Painel</h2></div>
+                <div class="stats-grid">
+                    <div class="stat-card"><div class="stat-info"><h4>Total Acervo</h4><div class="stat-value" id="stat-total">0</div></div><div class="stat-icon"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 6.5C10.5 5 8 4.5 4 4.5v13c4 0 6.5.5 8 2 1.5-1.5 4-2 8-2v-13c-4 0-6.5.5-8 2z"/><path d="M12 6.5v13"/></svg></div></div>
+                    <div class="stat-card"><div class="stat-info"><h4>Disponíveis</h4><div class="stat-value" id="stat-disp" style="color: var(--green);">0</div></div><div class="stat-icon"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l3 3 5-6"/></svg></div></div>
+                    <div class="stat-card"><div class="stat-info"><h4>Emprestados</h4><div class="stat-value" id="stat-emp" style="color: var(--red);">0</div></div><div class="stat-icon"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6"/><path d="M20 4l-9 9"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></div></div>
+                    <div class="stat-card"><div class="stat-info"><h4>Solicitações</h4><div class="stat-value" id="stat-pend" style="color: var(--yellow);">0</div></div><div class="stat-icon"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div></div>
+                </div>
+                <div class="dash-grid">
+                    <div class="panel">
+                        <h3>Contador de visitas</h3>
+                        <div class="visit-big" id="visit-total">0</div>
+                        <div class="visit-row"><span>Hoje: <b id="visit-hoje">0</b></span><span>Últimos 7 dias: <b id="visit-7d">0</b></span><span>No mês: <b id="visit-mes">0</b></span></div>
+                        <div class="mini-bars" id="visit-chart"></div>
+                    </div>
+                    <div class="panel">
+                        <h3>Os 3 usuários que mais acessaram</h3>
+                        <ol class="rank-list" id="top-users"></ol>
+                    </div>
+                </div>
+                <div class="panel">
+                    <h3>Conectados em tempo real <span class="badge badge-green" id="online-count">0</span></h3>
+                    <div class="table-responsive"><table class="admin-table">
+                        <thead><tr><th>Usuário</th><th>Perfil</th><th>IP</th><th>Página</th><th>Atividade</th><th id="th-online-acoes" style="display:none">Ações</th></tr></thead>
+                        <tbody id="table-online"></tbody></table></div>
+                    <p class="sec-intro" style="margin:10px 0 0">Atualiza a cada 5 segundos. Mostra quem está com o PLAY/painel aberto neste navegador; o IP é consultado pelo aparelho de cada pessoa.</p>
+                </div>
+                <div class="panel" id="panel-bans" style="display:none">
+                    <h3>IPs banidos <span class="badge badge-red" id="bans-count">0</span></h3>
+                    <div class="table-responsive"><table class="admin-table">
+                        <thead><tr><th>IP</th><th>Usuário</th><th>Motivo</th><th>Quando</th><th>Ações</th></tr></thead>
+                        <tbody id="table-bans"></tbody></table></div>
+                    <p class="sec-intro" style="margin:10px 0 0">Só o nível Webmaster vê esta lista. Administradores nunca são bloqueados. Os dados valem para este navegador/domínio; para atingir todos os aparelhos é preciso um servidor.</p>
+                </div>
+            </section>
+
+            <!-- ABA 1: SOLICITAÇÕES PENDENTES -->
+            <section id="admin-solicitacoes" class="admin-section">
+                <div class="section-header">
+                    <h2>Solicitações pendentes</h2>
+                </div>
+
+                <!-- Campo de Pesquisa para Solicitações Pendentes -->
+                <div class="search-bar-container">
+                    <input type="text" id="search-solicitacoes" class="search-input" placeholder="Pesquisar solicitação por jovem ou obra..." oninput="filtrarSolicitacoes()">
+                </div>
+
+                <div class="table-responsive">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Aprendiz</th>
+                                <th>Livro Solicitado</th>
+                                <th>Tipo</th>
+                                <th>Turma / Cidade</th>
+                                <th>Contato</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-solicitacoes"></tbody>
+                    </table>
+                </div>
+                <div class="pagination-bar">
+                    <span id="page-info-solicitacoes">Página 1 de 1</span>
+                    <div class="pagination-controls">
+                        <button class="btn-action btn-primary" id="btn-prev-solicitacoes" onclick="mudarPaginaSolicitacoes(-1)">Anterior</button>
+                        <button class="btn-action btn-primary" id="btn-next-solicitacoes" onclick="mudarPaginaSolicitacoes(1)">Próxima</button>
+                    </div>
+                </div>
+
+                <!-- Solicitações de Exclusão -->
+                <div id="solicitacoes-exclusao-container" style="margin-top: 30px; display: none;">
+                    <h3 style="font-family: 'Fredoka', cursive; color: var(--red); margin-bottom: 12px; font-size: 1.2rem;">
+                        Exclusões pendentes
+                    </h3>
+                    <div class="table-responsive">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Solicitante</th>
+                                    <th>Item / Alvo</th>
+                                    <th>Motivo da Exclusão</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="table-solicitacoes-exclusao"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ABA 2: EMPRÉSTIMOS ATIVOS & PRAZOS -->
+            <section id="admin-emprestimos" class="admin-section">
+                <div class="section-header">
+                    <h2>Empréstimos ativos e prazos</h2>
+                </div>
+                <div class="table-responsive">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Código</th>
+                                <th>Livro</th>
+                                <th>Aprendiz</th>
+                                <th>Contato</th>
+                                <th>Data de Retirada</th>
+                                <th>Devolução Prevista</th>
+                                <th>Status / Prazo</th>
+                                <th>Renovações</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-emprestimos"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- GESTÃO DE LIVROS -->
+            <section id="admin-livros" class="admin-section">
+                <div class="section-header"><h2>Gestão de livros</h2><button class="btn-action btn-primary" onclick="switchAdminTab('menuacervo')">Hiperlink no acervo</button></div>
+                <p class="sec-intro">Livros físicos, livros digitais (PDF ou links externos) e guias e manuais em um só lugar — tudo salvo e integrado ao PLAY. Categorias e etiquetas ficam nos submenus <strong>Categorias e prefixos</strong> e <strong>Gerador de etiquetas</strong>.</p>
+                <div class="lv-abas" role="tablist" aria-label="Tipos de conteúdo do acervo">
+                    <button type="button" role="tab" class="lv-aba active" data-aba="fisicos" aria-selected="true" onclick="livrosAba('fisicos')">Livros físicos</button>
+                    <button type="button" role="tab" class="lv-aba" data-aba="digitais" aria-selected="false" onclick="livrosAba('digitais')">Livros digitais</button>
+                    <button type="button" role="tab" class="lv-aba" data-aba="guias" aria-selected="false" onclick="livrosAba('guias')">Guias e manuais</button>
+                </div>
+                <div class="lv-painel" id="lv-fisicos">
+
+                <div class="panel big">
+                    <div class="sub-head"><h3>Livros físicos</h3><button class="btn-action btn-success" onclick="cadastrarNovoLivro()">Cadastrar livro físico</button></div>
+                    <div class="search-bar-container">
+                        <select id="filtro-acervo-categoria" class="search-input" style="flex: 0 0 220px;" onchange="filtrarAcervo()"><option value="">Todas as categorias</option></select>
+                        <input type="text" id="search-acervo" class="search-input" placeholder="Buscar por título, autor, editora, código ou ISBN..." oninput="filtrarAcervo()">
+                        <button type="button" class="btn-action btn-primary btn-ico" style="gap:6px" title="Escanear código de barras" onclick="cieeScanner.abrir({ titulo: 'Encontrar livro pelo código', onLido: t => { const s = document.getElementById('search-acervo'); s.value = t; filtrarAcervo(); } })"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"/><path d="M7 8v8M10 8v8M13 8v8M16 8v8"/></svg>Escanear</button>
+                    </div>
+                    <div class="table-responsive"><table class="admin-table">
+                        <thead><tr><th>Código</th><th>Título</th><th>Autor(a)</th><th>Categoria</th><th>Ano</th><th>Localização</th><th>Situação</th><th>Ações</th></tr></thead>
+                        <tbody id="table-acervo"></tbody></table></div>
+                    <div class="pagination-bar"><span id="page-info-acervo">Página 1 de 1</span>
+                        <div class="pagination-controls">
+                            <button class="btn-action btn-primary" id="btn-prev-acervo" onclick="mudarPaginaAcervo(-1)">Anterior</button>
+                            <button class="btn-action btn-primary" id="btn-next-acervo" onclick="mudarPaginaAcervo(1)">Próxima</button>
+                        </div></div>
+                </div>
+                </div>
+                <div class="lv-painel" id="lv-digitais" hidden><div class="panel big digital"><div id="digital-mount"></div></div></div>
+                <div class="lv-painel" id="lv-guias" hidden><div class="panel big"><div id="guias-mount"></div></div></div>
+            </section>
+
+            <!-- CATEGORIAS E PREFIXOS -->
+            <section id="admin-categorias" class="admin-section">
+                <div class="section-header"><h2>Categorias e prefixos</h2></div>
+                <p class="sec-intro">Os prefixos formam o código de cada livro (ex.: LIT-001) e as categorias aparecem nos filtros do acervo físico e digital.</p>
+                <div class="panel">
+                        <div class="sub-head"><h3>Categorias e prefixos</h3><button class="btn-action btn-primary" onclick="abrirModalNovaCategoria()">Nova Categoria</button></div>
+                        <div class="table-responsive"><table class="admin-table">
+                            <thead><tr><th>Prefixo</th><th>Nome</th><th>Físicos</th><th>Digitais</th><th>Ações</th></tr></thead>
+                            <tbody id="table-categorias"></tbody></table></div>
+                    </div>
+            </section>
+
+            <!-- GERADOR DE ETIQUETAS -->
+            <section id="admin-etiquetas" class="admin-section">
+                <div class="section-header"><h2>Gerador de etiquetas</h2></div>
+                <p class="sec-intro">Etiquetas de livros e de categorias para imprimir. Escolha as etiquetas e use <strong>Imprimir selecionadas</strong>.</p>
+                <div class="panel">
+                        <div class="sub-head"><h3>Gerador de etiquetas</h3><button class="btn-action btn-primary" onclick="imprimirEtiquetasSelecionadas()">Imprimir selecionadas</button></div>
+                        <div class="etq-tabs">
+                            <button class="etq-tab active" data-t="livros" onclick="etqSetTab('livros')">Etiquetas de livros</button>
+                            <button class="etq-tab" data-t="cats" onclick="etqSetTab('cats')">Etiquetas de categorias</button>
+                        </div>
+                        <div style="display:flex;gap:8px;margin-bottom:10px;align-items:center;flex-wrap:wrap">
+                            <button class="btn-action btn-primary" onclick="selecionarTodasEtiquetas(true)">Todas</button>
+                            <button class="btn-action btn-desmarcar" onclick="selecionarTodasEtiquetas(false)">Nenhuma</button>
+                            <button class="btn-action btn-success" onclick="sincronizarEtiquetas()">Sincronizar</button>
+                            <button class="btn-action btn-danger" onclick="excluirEtiquetasSelecionadas()">Remover</button>
+                            <span id="contador-etiquetas-selecionadas" style="font-weight:800;font-size:0.85rem;color: var(--muted-ok, #526071);margin-left:auto">0 selecionadas</span>
+                        </div>
+                        <div class="labels-sheet" id="print-area"></div>
+                        <div class="labels-sheet" id="print-area-cats" style="display:none"></div>
+                    </div>
+            </section>
+
+            <!-- ABA 6: GESTÃO DE OBJETOS ACHADOS E PERDIDOS -->
+            <section id="admin-objetos" class="admin-section">
+                <div class="section-header">
+                    <h2>Gestão de objetos (Achados e perdidos)</h2>
+                    <button class="btn-action btn-success" onclick="cadastrarNovoObjeto()">Cadastrar objeto</button>
+                </div>
+                <div class="table-responsive">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Imagem</th>
+                                <th>Objeto</th>
+                                <th>Data encontrado</th>
+                                <th>Período</th>
+                                <th>Quem encontrou</th>
+                                <th>Local (cidade)</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-objetos"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- ABA 7: GERENCIAR TURMAS -->
+            <section id="admin-turmas" class="admin-section">
+                <div class="section-header">
+                    <h2>Cidades e turmas</h2>
+                    <button class="btn-action btn-success" onclick="cadastrarNovaTurma()">Cadastrar nova turma</button>
+                </div>
+                
+                <div class="panel">
+                    <div class="sub-head"><h3>Cidades</h3><button class="btn-action btn-primary" onclick="novaCidade()">Nova cidade</button></div>
+                    <p class="sec-intro">As cidades cadastradas aparecem no cadastro dos aprendizes (index.html) e nas turmas.</p>
+                    <div class="table-responsive"><table class="admin-table"><thead><tr><th>Cidade</th><th>Turmas</th><th>Aprendizes</th><th>Ações</th></tr></thead><tbody id="table-cidades"></tbody></table></div>
+                </div>
+                <h3 style="font-family:'Fredoka',cursive;color:var(--theme-primary);margin:6px 0 10px">Turmas</h3>
+                <div id="container-turmas">
+                    <!-- Conteúdo renderizado pelo JS -->
+                </div>
+
+                <div class="pagination-bar">
+                    <span id="page-info-turmas">Página 1 de 1</span>
+                    <div class="pagination-controls">
+                        <button class="btn-action btn-primary" id="btn-prev-turmas" onclick="mudarPaginaTurmas(-1)">Anterior</button>
+                        <button class="btn-action btn-primary" id="btn-next-turmas" onclick="mudarPaginaTurmas(1)">Próxima</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- AUDITORIA › GESTÃO DE LOGINS -->
+            <section id="admin-logins" class="admin-section">
+                <div class="section-header"><h2>Aprendizes</h2><button class="btn-action btn-success" onclick="novoLogin()">Novo usuário</button></div>
+                <p class="sec-intro">Usuários cadastrados no PLAY: edite dados, troque a senha na hora, altere a validade da carteirinha ou exclua.</p>
+                <div class="search-bar-container">
+                    <input type="text" id="search-logins" class="search-input" placeholder="Buscar por nome, e-mail ou WhatsApp..." oninput="filtrarLogins()">
+                </div>
+                <div class="table-responsive"><table class="admin-table">
+                    <thead><tr><th>Usuário</th><th>E-mail</th><th>WhatsApp</th><th>Carteirinha (validade)</th><th>Último IP</th><th>Ações</th></tr></thead>
+                    <tbody id="table-logins"></tbody></table></div>
+                <div class="pagination-bar"><span id="page-info-logins">Página 1 de 1</span>
+                    <div class="pagination-controls">
+                        <button class="btn-action btn-primary" id="btn-prev-logins" onclick="mudarPaginaLogins(-1)">Anterior</button>
+                        <button class="btn-action btn-primary" id="btn-next-logins" onclick="mudarPaginaLogins(1)">Próxima</button>
+                    </div></div>
+            </section>
+
+            <!-- UTILIDADES › WI-FI -->
+            <section id="admin-wifi" class="admin-section">
+                <div class="section-header"><h2>Wi-fi</h2></div>
+                <p class="sec-intro">Edite os dados exibidos na página <strong>Aprendizagem › Wi-fi</strong> do PLAY (inclui o QR Code).</p>
+                <div class="grid-2">
+                    <div class="panel">
+                        <div class="form-grid">
+                            <div><label>Título da página</label><input id="wifi-titulo" class="search-input" oninput="wifiPrevia()"></div>
+                            <div><label>Nome da rede (SSID)</label><input id="wifi-ssid" class="search-input" oninput="wifiPrevia()"></div>
+                            <div><label>Senha do Wi-fi</label><input id="wifi-senha" class="search-input" oninput="wifiPrevia()"></div>
+                            <div><label>Segurança</label><select id="wifi-tipo" class="search-input" onchange="wifiPrevia()"><option value="WPA">WPA/WPA2</option><option value="WEP">WEP</option><option value="nopass">Sem senha</option></select></div>
+                        </div>
+                        <label style="font-weight:800;font-size:.85rem">Texto de instrução</label>
+                        <div class="form-grid"><textarea id="wifi-texto" rows="3" oninput="wifiPrevia()"></textarea></div>
+                        <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn-action btn-success" onclick="wifiSalvar()">Salvar</button><button class="btn-action btn-desmarcar" onclick="wifiRestaurar()">Restaurar padrão</button></div>
+                    </div>
+                    <div class="panel wifi-prev">
+                        <h3>Prévia no PLAY</h3>
+                        <h4 id="wifi-prev-titulo" style="font-family:'Fredoka',cursive;color:var(--theme-primary)"></h4>
+                        <p id="wifi-prev-texto" style="font-size:.9rem;color: var(--muted-ok, #526071);font-weight:700"></p>
+                        <img id="wifi-prev-qr" alt="QR Code Wi-fi" width="180" height="180">
+                        <p style="font-weight:800">Rede: <code id="wifi-prev-rede"></code></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- UTILIDADES › HISTÓRICO GERAL -->
+            <section id="admin-historico" class="admin-section">
+                <div class="section-header"><h2>Histórico Geral</h2></div>
+                <p class="sec-intro">Registro de solicitações, empréstimos (devoluções e renovações) e exclusões.</p>
+                <div class="search-bar-container">
+                    <select id="filtro-historico-tipo" class="search-input" style="flex:0 0 200px" onchange="filtrarHistorico()">
+                        <option value="">Todos os tipos</option><option value="Solicitações">Solicitações</option><option value="Empréstimos">Empréstimos</option><option value="Selos">Selos</option><option value="Exclusões">Exclusões</option>
+                    </select>
+                    <input type="text" id="search-historico" class="search-input" placeholder="Pesquisar por jovem, obra, responsável ou ação..." oninput="filtrarHistorico()">
+                </div>
+                <div class="table-responsive"><table class="admin-table">
+                    <thead><tr><th>Data/Hora</th><th>Tipo</th><th>Responsável</th><th>Aprendiz / Obra</th><th>Ação</th><th>Motivo / Observação</th></tr></thead>
+                    <tbody id="table-historico"></tbody></table></div>
+                <div class="pagination-bar"><span id="page-info-historico">Página 1 de 1</span>
+                    <div class="pagination-controls">
+                        <button class="btn-action btn-primary" id="btn-prev-historico" onclick="mudarPaginaHistorico(-1)">Anterior</button>
+                        <button class="btn-action btn-primary" id="btn-next-historico" onclick="mudarPaginaHistorico(1)">Próxima</button>
+                    </div></div>
+            </section>
+
+            <!-- ABA 9: CÓDIGOS DE ACESSO RÁPIDO (WEBMASTER) -->
+            <section id="admin-webmaster-codes" class="admin-section">
+                <div class="section-header">
+                    <h2>ByPass</h2>
+                    <button class="btn-action btn-success" onclick="cadastrarNovoAcesso()">Cadastrar novo acesso</button>
+                </div>
+                <p class="sec-intro">Acesso rápido da equipe na tela de login (botão ByPass): cada senha libera um perfil e um nível. Crie, edite ou exclua abaixo.</p>
+                <div class="table-responsive">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Senha</th>
+                                <th>Nome</th>
+                                <th>Nível</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-codigos"></tbody>
+                    </table>
+                </div>
+            
+                <div class="panel" style="margin-top:22px">
+                    <h3>Legenda de Níveis e Permissões</h3>
+                    <div id="niveis-legenda"></div>
+                </div>
+            </section>
+
+
+            <!-- SISTEMA -->
+            <section id="admin-configuracoes" class="admin-section">
+                <div class="section-header"><h2>Configurações</h2></div>
+                <p class="sec-intro">Área exclusiva do <strong>Webmaster</strong>. As mudanças valem para o portal e a tela de acesso e ficam registradas no Histórico geral.</p>
+
+                <div class="panel">
+                    <h3>Manutenção do app</h3>
+                    <p class="sec-intro">Ativada: na tela inicial o botão “Primeiro acesso” fica indisponível e o login libera apenas o <strong>ByPass</strong> (login comum e recuperação de senha ficam bloqueados).</p>
+                    <div class="sis-row"><span id="manut-status" class="badge badge-green">Desativada</span></div>
+                    <div class="sis-row">
+                        <button class="btn-action btn-danger" id="btn-manut-on" onclick="definirManutencao(true)">Ativar</button>
+                        <button class="btn-action btn-success" id="btn-manut-off" onclick="definirManutencao(false)">Desativar</button>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <h3>Recursos do sistema</h3>
+                    <p class="sec-intro">Ligue ou desligue partes do sistema. Desligado, o recurso some ou fica bloqueado para os usuários.</p>
+                    <div id="cfg-recursos" class="cfg-lista"></div>
+                </div>
+
+                <div class="panel">
+                    <h3>Limpar dados</h3>
+                    <p class="sec-intro">Apaga registros acumulados. Antes de apagar, você pode baixar um PDF com tudo o que será removido.</p>
+                    <div id="cfg-limpar" class="cfg-lista"></div>
+                </div>
+
+                <div class="panel">
+                    <h3>Resetar cadastros</h3>
+                    <p class="sec-intro">Remove todos os cadastros do tipo escolhido. Isto não pode ser desfeito — baixe o PDF antes.</p>
+                    <div id="cfg-resetar" class="cfg-lista"></div>
+                </div>
+
+                <div class="panel">
+                    <h3>Reconectar usuários</h3>
+                    <p class="sec-intro">Encerra a sessão de quem está conectado agora. Você escolhe quem sai e quem fica; a pessoa volta para a tela de acesso e entra de novo.</p>
+                    <div class="cfg-linha"><div><strong>Deslogar usuários conectados</strong><small id="cfg-online-info">Lista quem está conectado neste momento.</small></div><button class="btn-action btn-danger" onclick="cfgReconectar()">Escolher quem deslogar</button></div>
+                </div>
+            </section>
+
+            <section id="admin-sistema-versoes" class="admin-section">
+                <div class="section-header"><h2>Versão</h2><button class="btn-action btn-success" onclick="novaVersao()">Nova versão</button></div>
+                <p class="sec-intro">A versão marcada como <strong>atual</strong> aparece no rodapé da tela inicial (index.html).</p>
+                <div class="table-responsive"><table class="admin-table">
+                    <thead><tr><th>Versão</th><th>Data</th><th>Alterações</th><th>Situação</th><th>Ações</th></tr></thead>
+                    <tbody id="table-versoes"></tbody></table></div>
+            </section>
+
+            
+
+            <!-- RESTAURAR CONTEÚDO (somente Webmaster) -->
+            <section id="admin-restaurar" class="admin-section">
+                <div class="section-header"><h2>Restaurar conteúdo</h2></div>
+                <p class="sec-intro">Área exclusiva do <strong>Webmaster</strong>. Tudo o que orientadores, monitores ou administradores excluem fica guardado aqui por <strong>90 dias</strong>. Para restaurar, baixar ou esvaziar é preciso confirmar com a <strong>senha de administrador</strong>.</p>
+                <div id="rest-aviso" class="rest-ok" hidden></div>
+
+                <div class="panel">
+                    <h3>Lixeira</h3>
+                    <p class="sec-intro">Livros, categorias, turmas, cadastros, mural, calendário, achados e perdidos e o que mais foi excluído ou apagado pelas Configurações. Escolha o que voltar e confirme com a senha.</p>
+                    <div class="search-bar-container">
+                        <select id="rest-tipo" class="search-input" style="flex:0 0 240px" onchange="renderRestaurar()"><option value="">Todos os tipos</option></select>
+                        <input type="text" id="rest-busca" class="search-input" placeholder="Buscar item ou quem excluiu..." oninput="renderRestaurar()">
+                    </div>
+                    <div class="table-responsive"><table class="admin-table">
+                        <thead><tr><th>Quando</th><th>O que foi excluído</th><th>Excluído por</th><th>Itens</th><th>Ações</th></tr></thead>
+                        <tbody id="rest-tabela"></tbody></table></div>
+                    <div class="rest-rodape"><span id="rest-info" class="sec-intro" style="margin:0"></span><button class="btn-action btn-danger" id="rest-esvaziar" onclick="restEsvaziar()">Esvaziar lixeira</button></div>
+                </div>
+
+                <div class="panel">
+                    <h3>Backup em arquivo</h3>
+                    <p class="sec-intro">Para o que se perdeu fora da lixeira (aparelho trocado, dados do navegador apagados): baixe um backup de tempos em tempos e guarde em lugar seguro. O arquivo contém os cadastros, <strong>inclusive os dados de acesso</strong>, então não compartilhe.</p>
+                    <div class="cfg-linha"><div><strong>Baixar backup agora</strong><small id="rest-ultimo">Nenhum backup baixado ainda neste aparelho.</small></div><button class="btn-action btn-primary" onclick="restBackupBaixar()">Baixar backup</button></div>
+                    <div class="cfg-linha"><div><strong>Restaurar a partir de um backup</strong><small>Você escolhe o arquivo, vê o que existe nele e não existe mais aqui, marca o que voltar e confirma com a senha. O que já existe não é alterado.</small></div><button class="btn-action btn-success" onclick="document.getElementById('rest-arquivo').click()">Escolher arquivo</button><input type="file" id="rest-arquivo" accept=".json,application/json" hidden onchange="restBackupLer(this)"></div>
+                </div>
+            </section>
+
+            <!-- TEMAS SAZONAIS -->
+            <section id="admin-temas" class="admin-section">
+                <div class="section-header"><h2>Layout e temas</h2></div>
+                <p class="sec-intro">Os temas entram sozinhos nas datas abaixo e saem no dia seguinte. Quem entra com o login nesses períodos ganha o selo do tema, que aparece em <strong>Meu perfil</strong>. O <strong>teste manual</strong> mostra o tema na hora, mas não gera selos.</p>
+                <div class="panel">
+                    <h3>Situação</h3>
+                    <div id="temas-status" style="margin-bottom:10px;font-weight:700"></div>
+                    <div class="form-grid">
+                        <div class="form-group"><label for="tema-modo">Modo</label>
+                            <select id="tema-modo"><option value="auto">Automático (pelo calendário)</option><option value="desligado">Desligado</option><option value="forcar">Teste manual</option></select></div>
+                        <div class="form-group"><label for="tema-forcar">Tema do teste manual</label><select id="tema-forcar"></select></div>
+                        <div class="form-group"><label for="tema-nivel">Intensidade dos efeitos</label>
+                            <select id="tema-nivel"><option value="1">Suave</option><option value="2">Normal</option><option value="3">Intenso</option></select></div>
+                    </div>
+                    <div class="sis-row"><button class="btn-action btn-success" onclick="salvarTemas()">Salvar</button></div>
+                </div>
+                <div class="panel">
+                    <h3>Calendário e selos</h3>
+                    <div class="table-responsive"><table class="admin-table">
+                        <thead><tr><th>Tema</th><th>Quando entra</th><th>Próxima vez</th><th>Selo</th><th>Automático</th><th>Teste</th></tr></thead>
+                        <tbody id="table-temas"></tbody></table></div>
+                </div>
+            </section>
+
+            <!-- SUGESTÕES DOS APRENDIZES -->
+            <section id="admin-sugestoes" class="admin-section">
+                <div class="section-header"><h2>Sugestões dos aprendizes</h2></div>
+                <p class="sec-intro">Sugestões enviadas em <strong>Portal › Sugestões</strong>. Marque o andamento: o aprendiz vê o status em "Minhas sugestões". Enquanto não houver servidor, aparecem aqui só as sugestões feitas neste aparelho; as demais chegam por e-mail.</p>
+                <div class="stats-grid" id="sug-contas"></div>
+                <div class="panel">
+                    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px">
+                        <input type="text" id="sug-busca" class="search-input" style="flex:1;min-width:200px" placeholder="Pesquisar por aprendiz, assunto ou texto..." oninput="pageSug = 1; renderSugestoesAdmin()">
+                        <select id="sug-filtro" onchange="pageSug = 1; renderSugestoesAdmin()" style="padding:10px;border-radius:10px;border:2px solid var(--border-color);background:var(--input-bg);color:var(--text-dark);font-weight:700">
+                            <option value="">Todos os status</option><option>Nova</option><option>Em análise</option><option>Respondida</option><option>Arquivada</option>
+                        </select>
+                    </div>
+                    <div class="table-responsive"><table class="admin-table">
+                        <thead><tr><th>Data</th><th>Aprendiz</th><th>Assunto e sugestão</th><th>E-mail</th><th>Status</th><th>Ações</th></tr></thead>
+                        <tbody id="table-sugestoes"></tbody></table></div>
+                    <div class="pagination"><button class="btn-action btn-primary" id="btn-prev-sug" onclick="pageSug--; renderSugestoesAdmin()">Anterior</button><span id="page-info-sug"></span><button class="btn-action btn-primary" id="btn-next-sug" onclick="pageSug++; renderSugestoesAdmin()">Próxima</button></div>
+                </div>
+            </section>
+
+            <!-- SELOS DE CONQUISTA (concedidos manualmente) -->
+            <section id="admin-selos" class="admin-section">
+                <div class="section-header"><h2>Selos de conquista</h2></div>
+                <p class="sec-intro">Os pontos de leitura são automáticos: cada livro vale 1 ponto quando o aprendiz devolve, responde à reflexão e compartilha uma opinião no portal (níveis: 10 Explorador da Leitura, 20 Leitor em Ação, 30 Leitor Destaque). Orientadores e administradores concedem aqui os selos abaixo. Eles aparecem em <strong>Meu perfil</strong> do aprendiz, que recebe o aviso na próxima vez que entrar. Os selos de datas especiais e de leitura são automáticos.</p>
+                <div class="panel">
+                    <div class="nivel-cards">
+                        <div class="nivel-card"><h4>Representante de Turma</h4><p>Quando o aprendiz vira líder de sala. Vale por ano: dá para conceder de novo na próxima eleição.</p></div>
+                        <div class="nivel-card"><h4>Capricho I</h4><p>Entregou todo o portfólio do 1º ano.</p></div>
+                        <div class="nivel-card"><h4>Capricho II</h4><p>Entregou todo o portfólio do 1º e do 2º ano.</p></div>
+                        <div class="nivel-card"><h4>Voz da Leitura</h4><p>Desafio de leitura: apresentou uma recomendação de livro de 1 minuto.</p></div>
+                    </div>
+                    <div class="search-bar-container" style="margin:10px 0"><input type="text" id="search-selos" class="search-input" placeholder="Pesquisar aprendiz por nome ou e-mail..." oninput="searchSelos = this.value; pageSelos = 1; renderSelosAdmin()"></div>
+                    <div class="table-responsive"><table class="admin-table">
+                        <thead><tr><th>Aprendiz</th><th>Cidade / período</th><th>Pontos de leitura</th><th>Selos concedidos pela equipe</th><th>Ações</th></tr></thead>
+                        <tbody id="table-selos"></tbody></table></div>
+                    <div class="pagination"><button class="btn-action btn-primary" id="btn-prev-selos" onclick="pageSelos--; renderSelosAdmin()">Anterior</button><span id="page-info-selos"></span><button class="btn-action btn-primary" id="btn-next-selos" onclick="pageSelos++; renderSelosAdmin()">Próxima</button></div>
+                </div>
+            </section>
+
+            <!-- Seções geradas pelo JS (Guias, Equipe, Mural, Calendário, Artes, FAQ) -->
+            <div id="dyn-sections"></div>
+
+        </div>
+    </div>
+
+    <!-- Footer Discreto -->
+    <footer class="admin-footer" id="footer">
+        <span class="f-item">Por Fabrício • v<span id="app-version-a">0.1</span></span>
+        <span class="f-item">CIEESC ▶︎ PLAY &copy; <span id="current-year"></span></span>
+        <span class="f-item f-links"><a href="politica-de-privacidade.html">Privacidade</a> • <button type="button" onclick="window.cieeConsent && cieeConsent.abrir()">Cookies</button></span>
+    </footer>
+
+    <!-- Modal Customizado Unificado -->
+    <div id="custom-modal-overlay" class="modal-theme-overlay">
+        <div class="modal-theme-card">
+            <div class="modal-theme-header">
+                <span id="modal-icon" style="font-size: 1.5rem;"></span>
+                <h3 id="modal-title">Título do Popup</h3>
+            </div>
+            <div class="modal-theme-body" id="modal-body-content">Mensagem do modal...</div>
+            
+            <div id="modal-extra-content" style="display: none;"></div>
+
+            <div id="modal-input-container" style="display: none; margin-bottom: 15px;">
+                <label id="modal-input-label" style="font-weight: 800; font-size: 0.85rem; display: block; margin-bottom: 6px;">Campo:</label>
+                <textarea id="modal-input-field" rows="3" style="width: 100%; padding: 10px; border-radius: 10px; border: 2px solid var(--border-color); background: var(--input-bg); color: var(--text-dark);" placeholder="Informe aqui..."></textarea>
+            </div>
+
+            <div id="modal-dynamic-fields" style="display: none; margin-bottom: 15px;"></div>
+
+            <div id="modal-email-container" style="display: none; margin-bottom: 15px;">
+                <label style="display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 0.9rem; cursor: pointer;">
+                    <input type="checkbox" id="modal-email-checkbox" checked style="width: 18px; height: 18px; accent-color: var(--theme-primary);">
+                    Enviar e-mail de notificação ao aprendiz
+                </label>
+            </div>
+            
+            <div class="modal-theme-footer">
+                <button id="modal-btn-cancel" class="btn-action btn-danger" onclick="fecharModalCustom()">Cancelar</button>
+                <button id="modal-btn-confirm" class="btn-action btn-success">Confirmar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/pages/admin.js?v=2"></script>
+<script src="js/ui/acessibilidade.js?v=4" defer></script>
+<script src="js/core/moderacao.js" defer></script>
+<script src="js/core/offline.js?v=1" defer></script>
+<script src="js/ui/temas.js?v=1" defer></script>
+<script src="js/features/selos.js?v=1" defer></script>
+<script src="js/core/api.js?v=1" defer></script>
+<script src="js/features/perfil.js?v=1" defer></script>
+<script src="js/ui/atalhos.js?v=1" defer></script>
+<script src="js/ui/limpar-busca.js?v=1" defer></script>
+<script src="js/core/atualiza.js" defer></script>
+<script>if ('serviceWorker' in navigator) window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));</script>
+    <script>
+        (function () { try { const s = JSON.parse(localStorage.getItem('ciee_sistema') || '{}'); if (s.versao) document.getElementById('app-version-a').textContent = s.versao; } catch (e) {} })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self' https://formsubmit.co https://api.ipify.org https://brasilapi.com.br https://www.googleapis.com; frame-src 'self' blob: data: https:; object-src 'self' blob: data:; base-uri 'self'; form-action 'self' https://formsubmit.co; manifest-src 'self'; worker-src 'self'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<script src="js/core/seguranca.js?v=1"></script>
+<script src="js/features/biometria.js?v=1"></script>
+<script src="js/core/niveis.js?v=1"></script>
+<link rel="apple-touch-icon" sizes="180x180" href="assets/icons/icone-ios-v2.png?v=2">
+<link rel="apple-touch-icon-precomposed" href="assets/icons/icone-ios-v2.png?v=2">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>CIEESC ▶︎ PLAY • Portal de acesso</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/index.css?v=2">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" sizes="48x48" href="assets/icons/favicon-48.png">
+<link rel="icon" type="image/png" sizes="512x512" href="assets/icons/favicon-512.png">
+<meta name="theme-color" content="#0056b3">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="CIEESC PLAY">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+</head>
+<body>
+
+<div id="splash-screen">
+  <svg class="sh sh1" viewBox="0 0 100 86.6"><polygon points="25,2 75,2 98,43.3 75,84.6 25,84.6 2,43.3" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.6)" stroke-width="3.5"/></svg>
+  <svg class="sh sh2" viewBox="0 0 100 86.6"><polygon points="25,2 75,2 98,43.3 75,84.6 25,84.6 2,43.3" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.6)" stroke-width="3.5"/></svg>
+  <svg class="sh sh3" viewBox="0 0 100 86.6"><polygon points="25,2 75,2 98,43.3 75,84.6 25,84.6 2,43.3" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.6)" stroke-width="3.5"/></svg>
+  <svg class="sh sh4" viewBox="0 0 100 86.6"><polygon points="25,2 75,2 98,43.3 75,84.6 25,84.6 2,43.3" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.6)" stroke-width="3.5"/></svg>
+  <h1 class="logo" aria-label="CIEESC PLAY"><span class="w w1">CIEESC</span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5v17a1 1 0 0 0 1.5.86l14-8.5a1 1 0 0 0 0-1.72l-14-8.5A1 1 0 0 0 6 3.5z"/></svg><span class="w w3">PLAY</span></h1>
+  <p class="sub">Acervo da Aprendizagem</p>
+</div>
+
+<svg class="hex-shape hex1" viewBox="0 0 100 86.6"><polygon points="25,2 75,2 98,43.3 75,84.6 25,84.6 2,43.3" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.6)" stroke-width="3.5"/></svg>
+<svg class="hex-shape hex2" viewBox="0 0 100 86.6"><polygon points="25,2 75,2 98,43.3 75,84.6 25,84.6 2,43.3" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.4)" stroke-width="2"/></svg>
+<svg class="hex-shape hex3" viewBox="0 0 100 86.6"><polygon points="25,2 75,2 98,43.3 75,84.6 25,84.6 2,43.3" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.5)" stroke-width="3"/></svg>
+<svg class="hex-shape hex4" viewBox="0 0 100 86.6"><polygon points="25,2 75,2 98,43.3 75,84.6 25,84.6 2,43.3" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.6)" stroke-width="3.5"/></svg>
+
+<div class="scene" id="scene" data-side="">
+<div class="card-3d" id="card3d">
+
+  <!-- FACE INICIAL -->
+  <div class="card-face card-front" id="face-front">
+    <h2 class="front-title" aria-label="CIEESC PLAY"><span class="ft-a" aria-hidden="true">CIEESC <span class="play-cor play-svg"><svg viewBox="0 0 100 100" focusable="false"><path d="M14 10L90 50 14 90Z" fill="currentColor" stroke="currentColor" stroke-width="12" stroke-linejoin="round"/></svg></span> PLAY</span></h2>
+    <div class="maint-banner">App em manutenção. Neste momento só o acesso da equipe (BYPASS) está liberado.</div>
+    <button class="btn-choice" onclick="flipTo('login')">Login</button>
+    <button class="btn-choice" id="btn-first" onclick="flipTo('register')">Primeiro acesso</button>
+    <button type="button" class="btn-choice btn-bio" id="btn-bio" hidden onclick="entrarComBiometria()">Entrar com biometria</button>
+    <p class="login-msg" id="bio-msg" role="status" style="margin:0"></p>
+  </div>
+
+  <!-- FACE ESQUERDA: LOGIN -->
+  <div class="card-face card-left" id="face-login">
+    <h3 class="form-title">Login</h3>
+
+    <!-- Etapa 1: e-mail ou telefone -->
+    <form id="login-step-id" onsubmit="handleIdentify(event)">
+      <div class="maint-banner" style="margin-bottom:10px">App em manutenção. Use somente o <strong>ByPass</strong>.</div>
+      <div class="input-group"><label>E-mail ou telefone</label>
+        <input type="text" id="login-id" placeholder="seu.email@exemplo.com ou (48) 99999-9999" required autocomplete="username"></div>
+      <div class="login-msg" id="login-msg-id"></div>
+      <button type="submit" class="btn-action" id="btn-continue">Continuar</button>
+      <a href="#" class="forgot-pass link-off-target" id="link-recover" style="display:block;text-align:center;margin-top:10px" onclick="openRecover();return false;">[Recuperar senha]</a>
+      <button type="button" class="btn-bypass" onclick="openBypass()">ByPass</button>
+      <button type="button" class="btn-back" onclick="flipTo('front')">Voltar</button>
+    </form>
+
+    <!-- Etapa 2: confirmar o nome -->
+    <div id="login-step-confirm" style="display:none">
+      <div class="confirm-box">
+        <img id="confirm-photo" class="confirm-photo" alt="Foto" style="display:none">
+        <p class="confirm-ask">Encontramos este cadastro.<br>Você é <strong id="confirm-name"></strong>?</p>
+      </div>
+      <button type="button" class="btn-action" onclick="confirmIdentity()">Sim, sou eu</button>
+      <button type="button" class="btn-back" onclick="denyIdentity()">Não sou eu</button>
+    </div>
+
+    <!-- Etapa 3: senha -->
+    <form id="login-step-pass" style="display:none" onsubmit="handleLoginSubmit(event)">
+      <p class="confirm-ask" style="text-align:center;margin-bottom:10px">Olá, <strong id="hello-name"></strong>!</p>
+      <div class="input-group"><label>Senha</label>
+        <input type="password" id="login-pass" placeholder="••••••••" required autocomplete="current-password"></div>
+      <ul class="pass-legend" data-for="login-pass"><li data-r="len">Mínimo 8 caracteres</li><li data-r="upper">Letra maiúscula</li><li data-r="lower">Letra minúscula</li><li data-r="num">Número</li><li data-r="special">Caractere especial</li></ul>
+      <div class="login-msg" id="login-msg-pass"></div>
+      <div class="login-options"><label class="remember-me"><input type="checkbox" id="keep-connected"> Manter conectado</label></div>
+      <button type="submit" class="btn-action">Entrar</button>
+      <a href="#" class="forgot-pass" style="display:block;text-align:center;margin-top:10px" onclick="openRecover();return false;">[Recuperar senha]</a>
+      <button type="button" class="btn-back" onclick="denyIdentity()">Não sou eu</button>
+    </form>
+
+    <!-- Etapa ByPass: Representantes, Monitores, Orientadores e Webmaster (senha única, gerenciada no admin.html) -->
+    <form id="login-step-bypass" style="display:none" onsubmit="handleBypass(event)">
+      <p class="confirm-ask" style="text-align:center;margin-bottom:10px;font-size:.85rem">Acesso exclusivo para <strong style="font-size:.95rem">Representantes, Monitores, Orientadores e Webmaster</strong>.</p>
+      <div class="input-group"><label>Senha de acesso</label>
+        <input type="password" id="bypass-code" placeholder="Digite a senha do ByPass" required autocomplete="off"></div>
+      <div class="login-msg" id="login-msg-bypass"></div>
+      <button type="submit" class="btn-action">Entrar</button>
+      <button type="button" class="btn-back" onclick="denyIdentity()">Voltar</button>
+    </form>
+  </div>
+
+  <!-- FACE DIREITA: 1º ACESSO (6 PÁGINAS) -->
+  <div class="card-face card-right" id="face-register">
+    
+    <div class="step-progress">
+      <div class="step-dot active" id="dot-1"></div><div class="step-dot" id="dot-2"></div><div class="step-dot" id="dot-3"></div>
+      <div class="step-dot" id="dot-4"></div><div class="step-dot" id="dot-5"></div><div class="step-dot" id="dot-6"></div>
+    </div>
+
+    <!-- 1: Identificação -->
+    <div id="page-1" class="reg-page">
+      <h3 class="form-title">1. Identificação</h3>
+      <div class="input-group"><label>Nome Completo</label><input type="text" id="reg-nome" placeholder="Digite seu nome completo"></div>
+      <div class="input-group"><label>Data de Nascimento</label>
+        <div class="dob-row">
+          <div class="cb"><input type="text" id="dob-dia" placeholder="Dia" autocomplete="off" inputmode="numeric" maxlength="2"><div class="cb-list"></div></div>
+          <div class="cb"><input type="text" id="dob-mes" placeholder="Mês" autocomplete="off" maxlength="12"><div class="cb-list"></div></div>
+          <div class="cb"><input type="text" id="dob-ano" placeholder="Ano" autocomplete="off" inputmode="numeric" maxlength="4"><div class="cb-list"></div></div>
+        </div>
+        <input type="hidden" id="reg-nascimento"></div>
+      <button type="button" class="btn-action" onclick="nextPage(2)">Próximo</button>
+      <button type="button" class="btn-back" onclick="flipTo('front')">Cancelar</button>
+    </div>
+
+    <!-- 2: Contato -->
+    <div id="page-2" class="reg-page" style="display:none">
+      <h3 class="form-title">2. Contato</h3>
+      <div class="input-group"><label>E-mail</label>
+        <input type="email" id="reg-email" placeholder="seu.email@exemplo.com">
+        <div class="email-pills">
+          <button type="button" class="pill-btn" onclick="appendDomain('@gmail.com')">+ @gmail.com</button>
+          <button type="button" class="pill-btn" onclick="appendDomain('@outlook.com')">+ @outlook.com</button>
+        </div></div>
+      <div class="input-group"><label>Número de telefone</label><input type="tel" id="reg-whatsapp" placeholder="(48) 99999-9999"></div>
+      <button type="button" class="btn-action" onclick="nextPage(3)">Próximo</button>
+      <button type="button" class="btn-back" onclick="nextPage(1)">Voltar</button>
+    </div>
+
+    <!-- 3: Contrato -->
+    <div id="page-3" class="reg-page" style="display:none">
+      <h3 class="form-title">3. Contrato</h3>
+      <div id="contract-inputs">
+        <div class="input-group"><label>Data Início Contrato CIEESC</label>
+          <div class="dob-row">
+            <div class="cb"><input type="text" id="ini-dia" placeholder="Dia" autocomplete="off" inputmode="numeric" maxlength="2"><div class="cb-list"></div></div>
+            <div class="cb"><input type="text" id="ini-mes" placeholder="Mês" autocomplete="off" maxlength="12"><div class="cb-list"></div></div>
+            <div class="cb"><input type="text" id="ini-ano" placeholder="Ano" autocomplete="off" inputmode="numeric" maxlength="4"><div class="cb-list"></div></div>
+          </div>
+          <input type="hidden" id="reg-inicio"></div>
+        <div class="input-group"><label>Cidade onde faz CIEESC</label>
+          <select id="reg-cidade" onchange="unlockPeriodo()">
+            <option value="" disabled selected>Selecione a cidade...</option>
+            <option value="Braço do Norte">Braço do Norte</option>
+            <option value="Imbituba">Imbituba</option>
+            <option value="Tubarão">Tubarão</option>
+          </select></div>
+        <div class="input-group"><label>Dia / Período Aprendizagem</label>
+          <select id="reg-periodo" disabled>
+            <option value="" disabled selected>Aguardando cidade...</option>
+            <option value="Segunda/Quarta - Matutino">Segunda/Quarta - Matutino</option>
+            <option value="Segunda/Quarta - Vespertino">Segunda/Quarta - Vespertino</option>
+            <option value="Terça/Quinta - Matutino">Terça/Quinta - Matutino</option>
+            <option value="Terça/Quinta - Vespertino">Terça/Quinta - Vespertino</option>
+            <option value="Sexta-feira - Integral">Sexta-feira - Integral</option>
+          </select></div>
+        <button type="button" class="btn-action" onclick="verifyInformation()">Verificar Informações</button>
+      </div>
+      <div id="review-container" style="display:none">
+        <p style="font-weight:800;font-size:.85rem;margin-bottom:6px">Confira se os dados estão corretos:</p>
+        <div class="review-box" id="review-content"></div>
+        <button type="button" class="btn-action btn-disabled" id="btn-confirm-review" disabled onclick="confirmReview()">Tudo Certo! Prosseguir</button>
+        <button type="button" class="btn-back" onclick="editInformation()">Corrigir Informações</button>
+      </div>
+      <button type="button" class="btn-back" id="btn-back-p3" onclick="nextPage(2)">Voltar</button>
+    </div>
+
+    <!-- 4: Foto -->
+    <div id="page-4" class="reg-page" style="display:none">
+      <h3 class="form-title">4. Sua Foto</h3>
+      <p style="font-size:.8rem;color:#718096;text-align:center">Escolha uma foto clara para a sua carteirinha. Arraste para centralizar.</p>
+      <div class="photo-container" id="photo-container">
+        <span id="photo-placeholder" style="font-size:.75rem;font-weight:800;color:var(--theme-primary);text-align:center;padding:5px">Toque para carregar foto</span>
+        <img id="photo-preview" class="photo-preview" style="display:none" draggable="false" alt="Prévia">
+      </div>
+      <input type="file" id="photo-input" accept="image/*" style="display:none" onchange="loadPhoto(event)">
+      <div class="crop-controls" id="crop-controls" style="display:none">
+        <button type="button" class="crop-btn" onclick="adjustZoom(0.1)">+ Zoom</button>
+        <button type="button" class="crop-btn" onclick="adjustZoom(-0.1)">− Zoom</button>
+        <button type="button" class="crop-btn" onclick="resetZoom()">Centralizar</button>
+        <button type="button" class="crop-btn" onclick="document.getElementById('photo-input').click()">Trocar foto</button>
+      </div>
+      <button type="button" id="btn-p4-next" class="btn-action btn-disabled" disabled onclick="confirmPhoto()">Criar Senha</button>
+      <button type="button" class="btn-back" onclick="nextPage(3)">Voltar</button>
+    </div>
+
+    <!-- 5: Senha -->
+    <div id="page-5" class="reg-page" style="display:none">
+      <h3 class="form-title">5. Criar Senha</h3>
+      <div class="input-group"><label>Senha</label>
+        <input type="password" id="reg-pass" placeholder="Mínimo 6 caracteres" oninput="checkStrength()">
+        <div class="strength-bar"><span id="sb1"></span><span id="sb2"></span><span id="sb3"></span></div>
+        <div class="strength-label" id="strength-label">Nível da senha: —</div>
+        <ul class="pass-legend" data-for="reg-pass"><li data-r="len">Mínimo 8 caracteres</li><li data-r="upper">Letra maiúscula</li><li data-r="lower">Letra minúscula</li><li data-r="num">Número</li><li data-r="special">Caractere especial</li></ul></div>
+      <div class="input-group"><label>Confirmar Senha</label>
+        <input type="password" id="reg-pass2" placeholder="Repita a senha" oninput="checkStrength()">
+        <div class="pass-msg" id="pass-msg"></div></div>
+      <div class="input-group"><label>Dica de Senha (obrigatória)</label>
+        <input type="text" id="reg-hint" placeholder="Algo que só você entenda (sem a senha)" maxlength="60" required></div>
+      <button type="button" class="btn-action" onclick="nextPage(6)">Ir para os Termos</button>
+      <button type="button" class="btn-back" onclick="nextPage(4)">Voltar</button>
+    </div>
+
+    <!-- 6: Termos + Carteirinha -->
+    <div id="page-6" class="reg-page" style="display:none">
+      <h3 class="form-title">6. Responsabilidade</h3>
+      <div id="terms-section">
+        <p class="terms-hint">Marque cada frase para liberar a próxima. Leia também a <a href="politica-de-privacidade.html" target="_blank" rel="noopener" style="color:inherit;font-weight:900">Política de Privacidade</a>.</p>
+        <div class="terms-list" id="terms-list">
+          <div class="term-item visible"><input type="checkbox" id="t1" onchange="onTermCheck(1)"><label for="t1">1. Comprometo-me a utilizar o site CIEESC ▶︎ PLAY com ética e responsabilidade.</label></div>
+          <div class="term-item"><input type="checkbox" id="t2" onchange="onTermCheck(2)"><label for="t2">2. Respeitarei todos os colegas e o acervo digital de aprendizagem.</label></div>
+          <div class="term-item"><input type="checkbox" id="t3" onchange="onTermCheck(3)"><label for="t3">3. Empréstimo de livros: manterei a integridade dos materiais físicos e virtuais.</label></div>
+          <div class="term-item"><input type="checkbox" id="t4" onchange="onTermCheck(4)"><label for="t4">4. Devolverei qualquer exemplar emprestado dentro do prazo acordado.</label></div>
+        </div>
+        <button type="button" id="btn-accept-terms" class="btn-action btn-disabled" disabled onclick="finalizeRegistration()">Aceitar e finalizar</button>
+        <button type="button" class="btn-back" onclick="nextPage(5)">Voltar</button>
+      </div>
+
+      <div id="card-preview-section" style="display:none">
+        <div class="library-card">
+          <div class="card-header-ciee">
+            <span class="card-badge">BIBLIOTECA CIEE SC</span>
+          </div>
+          <div class="card-body-ciee">
+            <img id="card-photo-display" class="card-photo" src="" alt="Foto">
+            <div class="card-info">
+              <div class="card-info-name" id="card-name-display">Aprendiz</div>
+              <div><strong>Cidade:</strong> <span id="card-city-display">-</span></div>
+              <div><strong>Período:</strong> <span id="card-period-display">-</span></div>
+              <div class="card-info-exp">Validade: <span id="card-exp-display">DD/MM/AAAA</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="mail-status" id="mail-status">Enviando cópia do cadastro por e-mail...</div>
+        <div class="redirect-timer">Redirecionando em <span id="timer-count">10</span> segundos...</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- CARD: Recuperar senha -->
+<div class="rv-overlay" id="recover-modal" onclick="if(event.target===this)closeRecover()">
+  <div class="rv-card">
+    <form id="rv-step-id" onsubmit="handleRecoverLookup(event)">
+      <h3 class="form-title">Recuperar senha</h3>
+      <p class="confirm-ask" style="text-align:center;margin-bottom:12px;font-size:.85rem">Digite o e-mail e o telefone registrados no seu cadastro.</p>
+      <div class="input-group"><label>E-mail cadastrado</label>
+        <input type="email" id="rv-email" placeholder="seu.email@exemplo.com" required autocapitalize="off" spellcheck="false" autocomplete="email"></div>
+      <div class="input-group"><label>Telefone cadastrado</label>
+        <input type="tel" id="rv-whats" placeholder="(48) 99999-9999" required autocomplete="tel"></div>
+      <div class="login-msg" id="rv-msg-id"></div>
+      <button type="submit" class="btn-action">Verificar cadastro</button>
+      <button type="button" class="btn-back" onclick="closeRecover()">Cancelar</button>
+    </form>
+
+    <div id="rv-step-confirm" style="display:none">
+      <h3 class="form-title">É você?</h3>
+      <div class="confirm-box">
+        <img id="rv-photo" class="confirm-photo" alt="Foto" style="display:none">
+        <p class="confirm-ask">Encontramos o cadastro de<br><strong id="rv-name"></strong></p>
+        <p class="confirm-ask" style="font-size:.8rem;margin-top:8px">O código será enviado para <strong id="rv-mail" style="font-size:.85rem"></strong></p>
+      </div>
+      <div class="login-msg" id="rv-msg-confirm"></div>
+      <button type="button" class="btn-action" id="rv-send" onclick="sendRecovery()">Enviar recuperação por e-mail</button>
+      <button type="button" class="btn-back" onclick="openRecoverStep('id')">Não sou eu</button>
+    </div>
+
+    <form id="rv-step-reset" style="display:none" onsubmit="handleReset(event)">
+      <h3 class="form-title">Nova senha</h3>
+      <p class="confirm-ask" style="text-align:center;margin-bottom:10px;font-size:.85rem">Digite o código de 6 dígitos enviado para <strong id="rv-mail2" style="font-size:.9rem"></strong>. Ele vale por 15 minutos.</p>
+      <div class="input-group"><label>Código recebido</label>
+        <input type="text" id="rec-code" inputmode="numeric" maxlength="6" placeholder="000000" autocomplete="one-time-code" required></div>
+      <div class="input-group"><label>Nova senha</label>
+        <input type="password" id="rec-pass" placeholder="Crie a nova senha" required autocomplete="new-password">
+        <ul class="pass-legend" data-for="rec-pass"><li data-r="len">Mínimo 8 caracteres</li><li data-r="upper">Letra maiúscula</li><li data-r="lower">Letra minúscula</li><li data-r="num">Número</li><li data-r="special">Caractere especial</li></ul></div>
+      <div class="input-group"><label>Confirmar nova senha</label>
+        <input type="password" id="rec-pass2" placeholder="Repita a nova senha" required autocomplete="new-password"></div>
+      <div class="login-msg" id="rv-msg-reset"></div>
+      <button type="submit" class="btn-action">Redefinir senha</button>
+      <button type="button" class="btn-back" onclick="closeRecover()">Cancelar</button>
+    </form>
+  </div>
+</div>
+
+<footer class="admin-footer" id="footer">
+  <span class="f-item">Por Fabrício • v<span id="app-version">0.1</span></span>
+  <span class="f-item">CIEESC ▶︎ PLAY &copy; <span id="current-year"></span></span>
+  <span class="f-item f-links"><a href="politica-de-privacidade.html">Privacidade</a> • <button type="button" onclick="window.cieeConsent && cieeConsent.abrir()">Cookies</button></span>
+</footer>
+
+<script src="js/pages/index.js?v=1"></script>
+<script src="js/ui/cookies.js?v=3" defer></script>
+<script src="js/ui/acessibilidade.js?v=4" defer></script>
+<script src="js/core/moderacao.js" defer></script>
+<script src="js/core/offline.js?v=1" defer></script>
+<script src="js/ui/temas.js?v=1" defer></script>
+<script src="js/ui/atalhos.js?v=1" defer></script>
+<script src="js/core/atualiza.js" defer></script>
+<script>if ('serviceWorker' in navigator) window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));</script>
+</body>
+</html>

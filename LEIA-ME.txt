@@ -1,0 +1,193 @@
+CIEESC ▶︎ PLAY — pacote completo (v41 · modelo LOCAL, dados só no aparelho/localStorage)
+==========================================================================
+
+COMO PUBLICAR (GitHub Pages)
+1) Descompacte o pacote. No repositório, clique em Add file > Upload files e ARRASTE o conteúdo da pasta
+   (os arquivos soltos E as pastas assets, css, docs e js). O GitHub mantém as pastas. Clique em Commit changes.
+2) Só na primeira vez com pastas: apague do repositório os arquivos .js e .png antigos que ficaram soltos na
+   raiz (ex.: temas.js, icon-192.png). Na raiz devem ficar só os arquivos listados abaixo em "Raiz".
+3) Espere uns 2 minutos. Abra o site e feche o app por completo; ao abrir de novo ele baixa a versão nova.
+   (No computador: Ctrl+F5.)
+4) Para instalar no celular: abra o site no navegador > Compartilhar/Menu > Adicionar à Tela de Início.
+
+ESTRUTURA DE PASTAS
+ Raiz (não mover) . index.html (acesso/cadastro) · playing.html (portal) · admin.html (painel)
+                    politica-de-privacidade.html · 404.html (o GitHub Pages exige na raiz)
+                    sw.js (precisa ficar na raiz para o app funcionar offline) · manifest.json · LEIA-ME.txt
+ css/ ............. estilos de cada página: index.css · playing.css · admin.css · politica.css
+ js/pages/ ........ lógica de cada página: index.js · playing.js · admin.js
+ js/core/ ......... base do sistema: seguranca.js (senhas, tentativas, recursos ligados) · niveis.js (níveis 1 a 5
+                    e validade da sessão) · api.js (ligação com o servidor — ainda desligada; é aqui que entra
+                    o Supabase) · offline.js (tela "Falha na conexão") · moderacao.js (chutar/banir)
+                    atualiza.js (aviso de versão nova) · lixeira.js (lixeira e backup do painel: Sistema › Restaurar conteúdo)
+ js/ui/ ........... interface: temas.js (temas sazonais) · acessibilidade.js · atalhos.js · cookies.js (LGPD) · limpar-busca.js ("x" nos campos de busca)
+ js/features/ ..... funcionalidades: selos.js · leituras.js (pontos de leitura) · perfil.js (Meu perfil)
+                    sugestoes.js · calendario.js · biometria.js · scanner.js (código de barras)
+                    imagem.js (capas) · relatorio.js (PDF antes de limpar/resetar)
+ js/vendor/ ....... bibliotecas de terceiros (MIT), não editar: qrcode.js · zxing.js · jspdf.js · jspdf-autotable.js
+ assets/icons/ .... ícones do app e favicons (icon-192, icon-512, maskable-512, apple-touch-icon, icone-ios-v2, favicon-48/512)
+ assets/img/ ...... logo-animado.svg
+ docs/ ............ BACKEND.md · AUDITORIA-SEGURANCA.md (auditoria e plano para o Supabase)
+
+ Ao criar um arquivo novo: coloque na pasta certa, ligue na página com o caminho a partir da raiz
+ (ex.: <script src="js/features/novo.js?v=1" defer></script>), inclua o caminho em sw.js (lista ARQUIVOS)
+ e aumente o número da versão em sw.js.
+
+NÍVEIS DE ACESSO
+ 1 Aprendiz · 2 Representante de Turma · 3 Monitor(a) · 4 Orientador(a) · 5 Webmaster
+ Aprendiz entra com e-mail ou telefone e senha. Os níveis 2 a 5 entram pelo ByPass (senha de acesso).
+
+TEMAS SAZONAIS (entram sozinhos pela data; controle em Painel > Sistema > Temas sazonais, níveis 4 e 5)
+ Halloween 31/10 · Consciência Negra 20/11 · Natal 24 e 25/12 · Ano Novo 31/12 e 01/01 · Dia do Leitor 07/01
+ Páscoa: 3 dias antes, domingo e 1 dia depois · Jovem Aprendiz 24/04 · Educação 28/04 · Escritor 25/07
+ Modos: Automático, Desligado ou Teste manual (o teste manual não gera selos).
+
+SELOS DE CONQUISTA (Portal › Meu perfil › Meus Selos — 21 no total)
+ Aprendizagem (3) .... Representante de Turma, Capricho I e Capricho II — concedidos pela equipe (níveis 4 e 5)
+                       em Painel › Gestão da equipe › Selos de conquista.
+ Leitura (3) ......... por PONTOS: 10 Explorador da Leitura · 20 Leitor em Ação · 30 Leitor Destaque.
+ Desafios (6) ........ Novos Horizontes (gênero diferente do que mais lê) · Raízes Brasileiras (autor(a) brasileiro(a))
+                       Leitura Profissional (livro ligado à profissão) · Boa Indicação (indicou um livro a um colega)
+                       Escolha de Colega (leu um livro indicado por um colega) · Voz da Leitura (recomendação de
+                       1 minuto — concedido pela equipe). Os cinco primeiros saem sozinhos.
+ Datas especiais (9) . um por tema, uma vez por ano, ao entrar com o login no período do tema.
+
+PONTOS DE LEITURA (Portal › Acervo › Minhas leituras)
+ Cada livro vale 1 PONTO, e só depois de 3 critérios:
+   1. Leu ........ devolveu o livro (a equipe confirma a devolução em Empréstimos)
+   2. Refletiu ... respondeu "O que você achou mais interessante neste livro?"
+   3. Compartilhou deixou uma breve opinião (aparece para outros jovens no cartão do livro, com o primeiro nome)
+ Não é prova: basta escrever pelo menos 10 caracteres em cada resposta. O mesmo livro conta uma vez só por pessoa,
+ e ler mais rápido não dá mais pontos. Ao concluir, o jovem pode indicar o livro a um colega.
+ Para os desafios, marque nos livros (Painel › Acervo › editar livro): "Autor(a) brasileiro(a)?" e "Ligado à profissão?".
+ O gênero do livro é a categoria do acervo.
+
+CALENDÁRIO (Portal › Aprendizagem › Calendário)
+ Calendário próprio, nas cores do tema (substitui o Outlook): mês com os eventos, toque no dia para ver detalhes,
+ ‹ › para mudar de mês e "Hoje". No celular os eventos aparecem como pontinhos coloridos.
+ Eventos: Painel › Utilidades › Calendário (monitor, orientador e webmaster). Campos: título, categoria, data,
+ "termina em" (eventos de vários dias), horário, cidade (todas ou uma), local e descrição.
+ Cada aprendiz vê os eventos gerais e os da sua cidade (pode marcar "todas as cidades"). As datas dos temas
+ sazonais (Halloween, Natal...) aparecem sozinhas como "Data especial".
+
+ENTRAR COM BIOMETRIA (celular)
+ O aprendiz ativa em Portal › Meu perfil › Configurações › "Entrada com biometria" (pede a senha antes).
+ Depois, na tela de acesso do mesmo celular, aparece "Entrar com biometria" (Face ID, desbloqueio facial ou digital).
+ O portal não recebe a imagem do rosto nem a digital: quem confere é o próprio aparelho (tecnologia WebAuthn).
+ Vale só no aparelho onde foi ativada. Não aparece no computador nem no modo manutenção.
+
+SEGURANÇA (detalhes em docs/AUDITORIA-SEGURANCA.md)
+ Corrigido nesta versão: XSS (código malicioso em nomes/textos), senha fora do e-mail de cadastro, QR do Wi-Fi
+ gerado no aparelho, senhas com PBKDF2 + sal, limite de tentativas no login, política de segurança (CSP),
+ links externos protegidos e validade da sessão (30 dias / 7 dias / equipe 12 horas).
+ Depende do Supabase: login e permissões no servidor, dados pessoais fora do navegador, e-mails pelo servidor.
+
+BUSCA POR ISBN
+ Painel › Acervo › Gestão de livros: no cadastro/edição, digite o ISBN e toque em "Buscar pelo ISBN".
+ Título, autor, coautor, editora, ano e sinopse são preenchidos (BrasilAPI; se não achar, Google Livros).
+ Confira antes de salvar. No portal, a busca do acervo físico também encontra pelo ISBN.
+
+PAINEL — NOVA ORGANIZAÇÃO
+ Menu: Painel · Acervo · Gestão de objetos · Usuários · Utilidades · Sistema.
+ Acervo: Solicitações, Empréstimos, Gestão de livros (abas Livros físicos, Livros digitais e Guias e manuais; botão
+ "Hiperlink no acervo"), Categorias e prefixos, Gerador de etiquetas.
+ Sistema: Configurações, Layout e temas, Histórico geral, Versão.
+ O botão "Desconectar" fica dentro do nome do usuário (canto do cabeçalho). "Ir para o Acervo" leva ao portal.
+
+CONFIGURAÇÕES (só Webmaster)
+ Recursos liga/desliga: entrada por biometria, novos primeiros acessos, empréstimo, devolução e caixa de sugestões.
+ Limpar: histórico geral, mural, solicitações, empréstimos (inclui os em andamento), achados e perdidos, eventos do calendário.
+ Resetar: cidades, turmas, orientadores, monitores, representantes e aprendizes (por cidade ou todos).
+ Tudo pede para digitar APAGAR/RESETAR e oferece baixar um PDF de backup antes. As ações ficam no Histórico geral.
+ Reconectar: lista quem está conectado e você escolhe quem será deslogado (administradores não saem).
+
+EMPRÉSTIMO DE LIVROS (portal + painel)
+ O aprendiz pede pelo portal (Acervo físico) e a equipe responde em Painel › Acervo › Solicitações:
+   Pedir empréstimo ... a equipe aprova (cria o empréstimo de 30 dias) ou recusa com motivo.
+   Pedir renovação .... só nos últimos 7 dias; aprovada soma +30 dias (uma renovação por empréstimo).
+   Devolver ........... a equipe confere e confirma; aí a leitura fica esperando a reflexão do aprendiz (ponto de leitura).
+ No portal o cartão do livro mostra "Aguardando aprovação", "Renovação em análise" ou "Devolução em análise". Se a equipe
+ recusar, o aprendiz vê o motivo no topo do Acervo físico até clicar em "Entendi". Tudo vai para o Histórico geral.
+ Sem servidor, painel e portal precisam estar no MESMO navegador/aparelho; com o Supabase isso passa a valer entre aparelhos.
+
+APRENDIZES E TURMAS
+ O dia/período e o ID (código da turma) vêm das turmas cadastradas em Usuários › Cidades e turmas: no cadastro de aprendizes
+ e no primeiro acesso, a pessoa escolhe a cidade e depois a turma dessa cidade. Sem turmas cadastradas, vale a lista padrão.
+
+TELA DE CARREGAMENTO E AVISO DE ATUALIZAÇÃO
+ A animação completa aparece quando o app é aberto de novo (mais de 15 minutos desde a última vez).
+ O aviso "atualizado" só aparece quando a VERSÃO publicada (número em sw.js, ex.: v40) é maior que a última vista neste aparelho.
+ Ao publicar uma atualização, aumente o número em sw.js (ciee-play-vNN) — é isso que dispara o aviso e atualiza o app.
+
+CAPAS DOS LIVROS
+ Gestão de livros (físicos e digitais): "Escolher e formatar imagem" — enquadrar, zoom, girar, brilho, preencher/encaixar.
+ A capa fica guardada no navegador (cerca de 20 a 30 KB cada). No portal os cartões mostram a capa (ou uma capa criada com a
+ cor da categoria), inclinam com o mouse e abrem uma janela com detalhes e navegação entre os livros.
+
+PORTAL — AJUSTES
+ Guias e manuais ficam no menu Acervo. "Equipe" e "Meus selos". Aniversariantes: até 5 por mês. Mural: 6 postagens por página.
+
+ESCANEAR CÓDIGO DE BARRAS (celular ou computador)
+ Portal › Acervo físico: botão "Escanear" ao lado da busca — lê o ISBN da contracapa (ou o código da etiqueta)
+ e mostra o livro. Painel › Gestão de livros: "Escanear" na busca e no cadastro (preenche o ISBN e busca os dados).
+ Usa a câmera traseira do celular ou a webcam. Sem câmera ou sem permissão: "Usar foto do código" ou "Digitar o número".
+ Chrome no Android/Mac usa o leitor do próprio navegador; iPhone, Windows e Linux usam o js/vendor/zxing.js (carregado só na hora).
+ A imagem da câmera é lida no aparelho e não é enviada para lugar nenhum. Precisa do site em https (GitHub Pages já é).
+
+CALENDÁRIO: MÊS OU ANO
+ Botões "Mês" e "Ano", lupas de afastar/aproximar, gesto de pinça no celular e Ctrl + rolagem no computador.
+ No ano: 12 meses pequenos com os dias de evento coloridos; tocar num mês ou dia abre aquele mês.
+
+SUGESTÕES NO PAINEL (Utilidades › Sugestões dos aprendizes — monitor, orientador e webmaster)
+ Lista as sugestões com busca e filtro por status (Nova, Em análise, Respondida, Arquivada).
+ Mudar o status aparece para o aprendiz em "Minhas sugestões" (2 por página, com páginas 1, 2, 3...).
+ "Responder" abre o e-mail para o aprendiz; orientador e webmaster podem excluir.
+ Sem servidor, aparecem só as sugestões feitas neste aparelho; as demais chegam por e-mail.
+
+SEM EMOJIS
+ Tela de acesso, portal e painel não usam emojis. Onde havia emoji no lugar da foto, aparecem as iniciais do nome.
+
+MEU PERFIL (menu do portal, com 3 telas)
+ Ver carteirinha ... a carteirinha do aprendiz
+ Meus Selos ........ os 15 selos de conquista (conquistados e ainda por conquistar)
+ Configurações ..... ver os dados (cargo, cidade, período, contrato, validade), editar foto, e-mail e telefone
+                     e escolher a APARÊNCIA (cor azul/roxo/rosa e tema claro/escuro). A tela de acesso não tem mais esses
+                     botões: ela segue a escolha feita aqui.
+ A senha só poderá ser trocada com código enviado ao e-mail/telefone, o que exige o servidor (docs/BACKEND.md).
+ Enquanto não houver servidor, o botão fica bloqueado.
+ O admin (Aprendizes > "Foto e contato") corrige foto, e-mail e telefone de um aprendiz; selos e empréstimos acompanham a troca de e-mail.
+
+COMPATIBILIDADE (computador e celular)
+ Todos os recursos acima funcionam nos dois formatos: menu "Meu perfil" (menu suspenso no computador, folha "Mais" no celular),
+ telas do painel (tabelas viram cartões no celular), janelas de selos e de foto/contato, temas sazonais, tela "sem conexão" e 404.
+ Foi conferido em navegador real (Chromium) nos tamanhos 320, 390, 844 (celular deitado), 768 (tablet), 1366 e 1920 px:
+ sem rolagem lateral e com tudo dentro da tela. Em celulares os temas usam menos efeitos; com "reduzir animações" ligado
+ no aparelho, os temas mudam só as cores.
+
+SUGESTÕES (portal › menu "Sugestões")
+ O aprendiz escreve a sugestão (assunto + texto) e ela vai por e-mail para TODOS os orientadores e monitores cadastrados
+ no painel que tenham e-mail. Vai junto o nome, e-mail, cidade e período do aprendiz, para que possam responder.
+ Usa o FormSubmit (o mesmo serviço do cadastro): no PRIMEIRO envio, o primeiro destinatário recebe um e-mail de ativação
+ do FormSubmit e precisa clicar para liberar; os demais recebem em cópia. Um envio a cada 2 minutos por aparelho.
+ O aprendiz vê as próprias sugestões enviadas na mesma tela.
+
+LOGO E APARÊNCIA
+ Portal, painel e tela de acesso usam o mesmo logo: CIEESC ▶︎ PLAY na fonte Fredoka, com o ▶︎ de cantos arredondados.
+ As cores (azul/roxo/rosa) e o tema claro/escuro ficam só em Portal › Meu perfil › Configurações › Aparência.
+ No painel, o celular tem o atalho "Aparência (no Portal › Meu perfil)" na folha "Mais".
+
+ANTES DE USAR DE VERDADE — LEIA
+ • As senhas ByPass de exemplo são 123 (Orientador) e 456 (Webmaster). Troque-as em Painel > Gestão da equipe > ByPass.
+   O código do site é público: como o app ainda não tem servidor, qualquer pessoa consegue ver essas senhas de exemplo.
+ • Sem servidor, TODOS os dados (cadastros, empréstimos, selos, temas, moderação) ficam só no navegador de cada aparelho.
+   Isso significa: não aparecem em outros aparelhos, e "chutar/banir" só vale para o mesmo navegador.
+ • Selos por data dependem do relógio do aparelho. Com servidor isso se resolve.
+ • A política de privacidade é um modelo: complete os campos entre [colchetes] e passe por revisão jurídica.
+ • Foi testado por simulação (sintaxe e navegador simulado), sem abrir em celulares reais. Faça os testes abaixo.
+
+TESTE RÁPIDO DEPOIS DE PUBLICAR
+ 1) Entre como aprendiz e abra Meu perfil (foto, e-mail, telefone, selos).
+ 2) Entre como Webmaster (ByPass) > Sistema > Temas sazonais > Testar um tema > volte para Automático.
+ 3) Em Empréstimos, confirme uma devolução e veja o selo de leitura quando chegar a 10 livros no ano.
+ 4) Ative o modo avião: deve aparecer a tela "Falha na conexão"; ao desativar, ela some sozinha.
+ 5) Abra um endereço que não existe (…/CIEESC_PLAY/teste): deve aparecer a página 404.
