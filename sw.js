@@ -1,5 +1,5 @@
 // Troque o número da versão a cada atualização dos arquivos para o celular baixar a nova versão.
-const VERSAO = 'ciee-play-v41';
+const VERSAO = 'ciee-play-v42';
 const ARQUIVOS = [
   './',
   './admin.html',

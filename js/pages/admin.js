@@ -1295,7 +1295,6 @@
             ]},
             { label: 'Sistema', itens: [
                 { id: 'configuracoes', label: 'Configurações', niveis: N(5) },
-                { id: 'restaurar', label: 'Restaurar conteúdo', niveis: N(5) },
                 { id: 'temas', label: 'Layout e temas', niveis: N(4) },
                 { id: 'historico', label: 'Histórico geral', niveis: N(2) },
                 { id: 'sistema-versoes', label: 'Versão', niveis: N(5) }
@@ -1354,7 +1353,7 @@
             { k: 'biblioteca', lb: 'Acervo', secoes: [{ t: 'Acervo', itens: [['solicitacoes', 'Solicitações'], ['emprestimos', 'Empréstimos'], ['livros', 'Gestão de livros'], ['categorias', 'Categorias e prefixos'], ['etiquetas', 'Gerador de etiquetas']] }] },
             { k: 'usuarios', lb: 'Usuários', secoes: [{ itens: [['turmas', 'Gerir cidades e turmas'], ['logins', 'Gerir aprendizes'], ['selos', 'Selos de conquista'], ['representantes', 'Gerir representantes'], ['monitores', 'Gerir monitores'], ['orientadores', 'Gerir orientadores'], ['adm', 'Gerir administrativo'], ['webmaster-codes', 'Gerir ByPass']] }] },
             { k: 'utilidades', lb: 'Utilidades', secoes: [{ itens: [['objetos', 'Achados & perdidos'], ['mural', 'Gerir mural'], ['calendario', 'Calendário'], ['sugestoes', 'Sugestões'], ['artes', 'Artes em foco'], ['wifi', 'Wi-fi'], ['faq', 'Dúvidas frequentes']] }] },
-            { k: 'mais', lb: 'Mais', secoes: [{ t: 'Auditoria', itens: [['historico', 'Histórico geral'], ['sistema-versoes', 'Versão']] }, { t: 'Sistema', itens: [['configuracoes', 'Configurações'], ['restaurar', 'Restaurar conteúdo'], ['temas', 'Layout e temas']] }] }
+            { k: 'mais', lb: 'Mais', secoes: [{ t: 'Auditoria', itens: [['historico', 'Histórico geral'], ['sistema-versoes', 'Versão']] }, { t: 'Sistema', itens: [['configuracoes', 'Configurações'], ['temas', 'Layout e temas']] }] }
         ];
         const closeSheet = () => document.body.classList.remove('m-sheet-open');
         const nivelM = () => { try { return sessionData.nivel; } catch (e) { return 0; } };
@@ -1464,7 +1463,6 @@
             if (tabId === 'logins') renderLogins();
             if (tabId === 'wifi') wifiCarregar();
             if (tabId === 'configuracoes') renderConfiguracoes();
-            if (tabId === 'restaurar') renderRestaurar();
             if (tabId === 'sistema-versoes') renderVersoes();
             if (tabId === 'temas') renderTemas();
             if (tabId === 'selos') renderSelosAdmin();
@@ -1569,6 +1567,7 @@
             $('cfg-limpar').innerHTML = CFG_LIMPAR.map(x => `<div class="cfg-linha"><div><strong>${escHtml(x.t)}<span class="cfg-qtd">${x.ler().length}</span></strong><small>${escHtml(x.d)}</small></div><button class="btn-action btn-danger" data-id="${x.id}" onclick="cfgLimpar(this.dataset.id)">Limpar</button></div>`).join('');
             $('cfg-resetar').innerHTML = CFG_RESETAR.map(x => `<div class="cfg-linha"><div><strong>${escHtml(x.t)}<span class="cfg-qtd">${x.ler().length}</span></strong><small>${escHtml(x.d)}</small></div><button class="btn-action btn-danger" data-id="${x.id}" onclick="cfgResetar(this.dataset.id)">Resetar</button></div>`).join('');
             const on = Object.values(lsGet('ciee_presenca', {})).filter(p => Date.now() - p.ts < 30000).length;
+            renderRestaurar();
             $('cfg-online-info').textContent = on ? on + (on === 1 ? ' usuário conectado agora.' : ' usuários conectados agora.') : 'Ninguém conectado neste momento.';
         }
         function cfgRecurso(k, on, el) {
@@ -1639,7 +1638,7 @@
         function cfgFluxo(x, verbo, palavra) {
             const qtd = x.ler().length;
             if (!qtd) return cfgDialog({ titulo: x.t, texto: 'Não há nada para ' + (verbo === 'Limpar' ? 'limpar' : 'resetar') + ' aqui.', botao: 'Entendi', onConfirm: () => {} });
-            cfgDialog({ titulo: x.t + '?', texto: x.d, aviso: `${qtd} registro(s) serão apagados. Uma cópia fica na lixeira por ${cieeLixeira.dias} dias (Sistema › Restaurar conteúdo).`, pdf: x.pdf, qtd, palavra, botao: verbo === 'Limpar' ? 'Apagar agora' : 'Resetar agora',
+            cfgDialog({ titulo: x.t + '?', texto: x.d, aviso: `${qtd} registro(s) serão apagados. Uma cópia fica na lixeira por ${cieeLixeira.dias} dias (Configurações › Restaurar conteúdo).`, pdf: x.pdf, qtd, palavra, botao: verbo === 'Limpar' ? 'Apagar agora' : 'Resetar agora',
                 onConfirm: async r => {
                     if (r.pdf) await cfgBaixarPdf(x);
                     persistirTudo(); ({ solicitacoes: ['ciee_solicitacoes', 'ciee_solicitacoes_exclusao'], emprestimos: ['ciee_emprestimos'] }[x.id] || []).forEach(k => cieeLixeira.guardar(k, 'Limpeza'));
@@ -1720,7 +1719,7 @@
         const campoSenha = `<label for="rest-senha" style="font-weight:800;display:block;margin:10px 0 4px">Senha de administrador</label><input type="password" id="rest-senha" autocomplete="current-password" class="rest-senha">`;
         function renderRestaurar() {
             const msg = (() => { try { const m = sessionStorage.getItem('ciee_rest_msg'); sessionStorage.removeItem('ciee_rest_msg'); return m; } catch (e) { return null; } })();
-            const av = $('rest-aviso'); if (msg) { av.textContent = msg; av.hidden = false; }
+            const av = $('rest-aviso'); if (msg) { av.textContent = msg; av.hidden = false; setTimeout(() => { try { $('cfg-restaurar').scrollIntoView({ block: 'start' }); } catch (e) {} }, 150); }
             const evs = cieeLixeira.eventos(), tipoSel = $('rest-tipo'), atual = tipoSel.value, q = ($('rest-busca').value || '').toLowerCase();
             const tipos = [...new Set(evs.map(e => e.k))].sort((a, b) => cieeLixeira.TIPOS[a].localeCompare(cieeLixeira.TIPOS[b]));
             tipoSel.innerHTML = '<option value="">Todos os tipos</option>' + tipos.map(k => `<option value="${k}">${escHtml(cieeLixeira.TIPOS[k])}</option>`).join('');

@@ -16,7 +16,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>CIEESC ▶︎ PLAY • Gerenciar</title>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/admin.css?v=2">
+    <link rel="stylesheet" href="css/admin.css?v=3">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" type="image/png" sizes="48x48" href="assets/icons/favicon-48.png">
 <link rel="icon" type="image/png" sizes="512x512" href="assets/icons/favicon-512.png">
@@ -469,27 +469,11 @@
                     <p class="sec-intro">Encerra a sessão de quem está conectado agora. Você escolhe quem sai e quem fica; a pessoa volta para a tela de acesso e entra de novo.</p>
                     <div class="cfg-linha"><div><strong>Deslogar usuários conectados</strong><small id="cfg-online-info">Lista quem está conectado neste momento.</small></div><button class="btn-action btn-danger" onclick="cfgReconectar()">Escolher quem deslogar</button></div>
                 </div>
-            </section>
-
-            <section id="admin-sistema-versoes" class="admin-section">
-                <div class="section-header"><h2>Versão</h2><button class="btn-action btn-success" onclick="novaVersao()">Nova versão</button></div>
-                <p class="sec-intro">A versão marcada como <strong>atual</strong> aparece no rodapé da tela inicial (index.html).</p>
-                <div class="table-responsive"><table class="admin-table">
-                    <thead><tr><th>Versão</th><th>Data</th><th>Alterações</th><th>Situação</th><th>Ações</th></tr></thead>
-                    <tbody id="table-versoes"></tbody></table></div>
-            </section>
-
-            
-
-            <!-- RESTAURAR CONTEÚDO (somente Webmaster) -->
-            <section id="admin-restaurar" class="admin-section">
-                <div class="section-header"><h2>Restaurar conteúdo</h2></div>
-                <p class="sec-intro">Área exclusiva do <strong>Webmaster</strong>. Tudo o que orientadores, monitores ou administradores excluem fica guardado aqui por <strong>90 dias</strong>. Para restaurar, baixar ou esvaziar é preciso confirmar com a <strong>senha de administrador</strong>.</p>
-                <div id="rest-aviso" class="rest-ok" hidden></div>
-
-                <div class="panel">
-                    <h3>Lixeira</h3>
-                    <p class="sec-intro">Livros, categorias, turmas, cadastros, mural, calendário, achados e perdidos e o que mais foi excluído ou apagado pelas Configurações. Escolha o que voltar e confirme com a senha.</p>
+                            <!-- RESTAURAR CONTEÚDO (lixeira e backup) -->
+                <div class="panel" id="cfg-restaurar">
+                    <h3>Restaurar conteúdo</h3>
+                    <p class="sec-intro">Tudo o que orientadores, monitores ou administradores excluem fica guardado aqui por <strong>90 dias</strong> (livros, categorias, turmas, cadastros, mural, calendário, achados e perdidos e o que as limpezas acima apagam). Para restaurar, baixar backup ou esvaziar é preciso confirmar com a <strong>senha de administrador</strong>.</p>
+                    <div id="rest-aviso" class="rest-ok" hidden></div>
                     <div class="search-bar-container">
                         <select id="rest-tipo" class="search-input" style="flex:0 0 240px" onchange="renderRestaurar()"><option value="">Todos os tipos</option></select>
                         <input type="text" id="rest-busca" class="search-input" placeholder="Buscar item ou quem excluiu..." oninput="renderRestaurar()">
@@ -507,6 +491,16 @@
                     <div class="cfg-linha"><div><strong>Restaurar a partir de um backup</strong><small>Você escolhe o arquivo, vê o que existe nele e não existe mais aqui, marca o que voltar e confirma com a senha. O que já existe não é alterado.</small></div><button class="btn-action btn-success" onclick="document.getElementById('rest-arquivo').click()">Escolher arquivo</button><input type="file" id="rest-arquivo" accept=".json,application/json" hidden onchange="restBackupLer(this)"></div>
                 </div>
             </section>
+
+            <section id="admin-sistema-versoes" class="admin-section">
+                <div class="section-header"><h2>Versão</h2><button class="btn-action btn-success" onclick="novaVersao()">Nova versão</button></div>
+                <p class="sec-intro">A versão marcada como <strong>atual</strong> aparece no rodapé da tela inicial (index.html).</p>
+                <div class="table-responsive"><table class="admin-table">
+                    <thead><tr><th>Versão</th><th>Data</th><th>Alterações</th><th>Situação</th><th>Ações</th></tr></thead>
+                    <tbody id="table-versoes"></tbody></table></div>
+            </section>
+
+            
 
             <!-- TEMAS SAZONAIS -->
             <section id="admin-temas" class="admin-section">
@@ -615,7 +609,7 @@
         </div>
     </div>
 
-    <script src="js/pages/admin.js?v=2"></script>
+    <script src="js/pages/admin.js?v=3"></script>
 <script src="js/ui/acessibilidade.js?v=4" defer></script>
 <script src="js/core/moderacao.js" defer></script>
 <script src="js/core/offline.js?v=1" defer></script>
