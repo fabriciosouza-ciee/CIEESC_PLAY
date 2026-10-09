@@ -1,0 +1,19 @@
+/* Estilos de politica-de-privacidade.html (extraído da página) */
+:root{--theme-primary:#0056b3;--theme-secondary:#6f42c1;--theme-accent:#00b4d8;--bg-gradient:linear-gradient(135deg,var(--theme-primary),var(--theme-secondary),var(--theme-accent))}
+*{box-sizing:border-box}
+html{font-size:17.5px}
+body{margin:0;font-family:'Nunito',system-ui,sans-serif;color:#2d3748;background:var(--theme-primary) var(--bg-gradient);background-size:400% 400%;animation:gradientBG 15s ease infinite;min-height:100vh;padding:calc(64px + env(safe-area-inset-top,0px)) 14px calc(24px + env(safe-area-inset-bottom,0px))}
+@keyframes gradientBG{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+main{max-width:860px;margin:0 auto;background:#fff;border-radius:24px;padding:26px 24px;box-shadow:0 14px 40px rgba(0,0,0,.3);line-height:1.6}
+h1{font-family:'Fredoka',cursive;font-size:1.8rem;margin:0 0 4px;color:var(--theme-primary)}
+h2{font-family:'Fredoka',cursive;font-size:1.2rem;margin:26px 0 8px;padding:8px 12px;border-left:5px solid var(--theme-primary);background:color-mix(in srgb,var(--theme-primary) 12%,#fff);border-radius:8px;color:var(--theme-primary)}
+p,li{font-size:1rem;font-weight:600}li{margin:4px 0}
+.meta{color:#718096;font-weight:700;font-size:.9rem;margin:0 0 14px}
+.voltar{display:inline-block;margin-bottom:14px;color:var(--theme-primary);font-weight:900;text-decoration:none}
+.aviso{background:#fff7e0;border:2px dashed #d97706;color:#92400e;border-radius:14px;padding:10px 14px;font-weight:700;font-size:.9rem}
+.termo{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:10px 14px;margin:6px 0}
+table{width:100%;border-collapse:collapse;margin:8px 0;font-size:.9rem}th,td{border:1px solid #e2e8f0;padding:8px;text-align:left;vertical-align:top}th{background:#f1f5f9}
+.tw{overflow-x:auto}
+.btn{border:2px solid var(--theme-primary);background:#fff;color:var(--theme-primary);border-radius:12px;padding:10px 16px;font:800 .95rem Nunito,system-ui,sans-serif;cursor:pointer}
+a{color:var(--theme-primary);font-weight:800}
+@media (max-width:600px){main{padding:18px 14px;border-radius:18px}h1{font-size:1.5rem}}
